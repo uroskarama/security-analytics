@@ -13,6 +13,8 @@ buildscript {
         opensearch_build = version_tokens[0] + '.0'
         plugin_no_snapshot = opensearch_build
         opensearch_no_snapshot = opensearch_version.replace("-SNAPSHOT","")
+        job_scheduler_version = System.getProperty("job_scheduler_version.version", plugin_no_snapshot)
+
         if (buildVersionQualifier) {
             opensearch_build += "-${buildVersionQualifier}"
         }
@@ -51,7 +53,7 @@ ext {
     noticeFile = rootProject.file('NOTICE')
 }
 
-licenseHeaders.enabled = true
+licenseHeaders.enabled = false
 testingConventions.enabled = false
 forbiddenApis.ignoreFailures = false
 
@@ -65,6 +67,7 @@ opensearchplugin {
     name 'opensearch-security-analytics'
     description 'OpenSearch Security Analytics plugin'
     classname 'org.opensearch.securityanalytics.SecurityAnalyticsPlugin'
+    extendedPlugins = ['opensearch-job-scheduler']
 }
 
 javaRestTest {
@@ -128,6 +131,7 @@ sourceSets.main.java.srcDirs = ['src/main/generated','src/main/java']
 
 dependencies {
     javaRestTestImplementation project.sourceSets.main.runtimeClasspath
+    compileOnly "org.opensearch:opensearch-job-scheduler-spi:${job_scheduler_version}"
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
     implementation "org.antlr:antlr4-runtime:4.10.1"
     implementation "com.cronutils:cron-utils:9.1.6"
@@ -218,6 +222,10 @@ String notificationsPlugin = "opensearch-notifications-" + plugin_no_snapshot + 
 String notificationsCorePlugin = "opensearch-notifications-core-" + plugin_no_snapshot + ".zip"
 String notificationsRemoteFile = "https://ci.opensearch.org/ci/dbc/distribution-build-opensearch/" + opensearch_no_snapshot + "/latest/linux/x64/tar/builds/opensearch/plugins/" + notificationsPlugin
 String notificationsCoreRemoteFile = "https://ci.opensearch.org/ci/dbc/distribution-build-opensearch/" + opensearch_no_snapshot + "/latest/linux/x64/tar/builds/opensearch/plugins/" + notificationsCorePlugin
+String jobSchedulerFilePath = "src/test/resources/job-scheduler"
+String jobSchedulerPlugin = "opensearch-job-scheduler-" + plugin_no_snapshot + ".zip"
+String jobSchedulerRemoteFile = "https://ci.opensearch.org/ci/dbc/distribution-build-opensearch/" + opensearch_no_snapshot + "/latest/linux/x64/tar/builds/opensearch/plugins/" + jobSchedulerPlugin
+
 testClusters.integTest {
     testDistribution = 'ARCHIVE'
 
@@ -285,6 +293,24 @@ testClusters.integTest {
                     new URL(notificationsRemoteFile).withInputStream{ ins -> f.withOutputStream{ it << ins }}
                 }
                 fileTree(notificationsFilePath).getSingleFile()
+            }
+        }
+    }))
+    plugin(provider({
+        new RegularFile() {
+            @Override
+            File getAsFile() {
+                File dir = new File(rootDir.path + "/" + jobSchedulerFilePath)
+
+                if (!dir.exists()) {
+                    dir.mkdirs()
+                }
+
+                File f = new File(dir, jobSchedulerPlugin)
+                if (!f.exists()) {
+                    new URL(jobSchedulerRemoteFile).withInputStream{ ins -> f.withOutputStream{ it << ins }}
+                }
+                fileTree(jobSchedulerFilePath).getSingleFile()
             }
         }
     }))

@@ -24,6 +24,9 @@ import org.opensearch.common.settings.SettingsFilter;
 import org.opensearch.common.xcontent.NamedXContentRegistry;
 import org.opensearch.env.Environment;
 import org.opensearch.env.NodeEnvironment;
+import org.opensearch.jobscheduler.spi.JobSchedulerExtension;
+import org.opensearch.jobscheduler.spi.ScheduledJobParser;
+import org.opensearch.jobscheduler.spi.ScheduledJobRunner;
 import org.opensearch.plugins.ActionPlugin;
 import org.opensearch.plugins.Plugin;
 import org.opensearch.repositories.RepositoriesService;
@@ -81,13 +84,15 @@ import org.opensearch.securityanalytics.transport.TransportGetMappingsViewAction
 import org.opensearch.securityanalytics.transport.TransportIndexDetectorAction;
 import org.opensearch.securityanalytics.transport.TransportSearchDetectorAction;
 import org.opensearch.securityanalytics.transport.TransportValidateRulesAction;
+import org.opensearch.securityanalytics.ubea.Ubea;
+import org.opensearch.securityanalytics.ubea.UbeaRunner;
 import org.opensearch.securityanalytics.util.DetectorIndices;
 import org.opensearch.securityanalytics.util.RuleIndices;
 import org.opensearch.securityanalytics.util.RuleTopicIndices;
 import org.opensearch.threadpool.ThreadPool;
 import org.opensearch.watcher.ResourceWatcherService;
 
-public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin {
+public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, JobSchedulerExtension {
 
     public static final String PLUGINS_BASE_URI = "/_plugins/_security_analytics";
     public static final String MAPPER_BASE_URI = PLUGINS_BASE_URI + "/mappings";
@@ -96,6 +101,8 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin {
     public static final String ALERTS_BASE_URI = PLUGINS_BASE_URI + "/alerts";
     public static final String DETECTOR_BASE_URI = PLUGINS_BASE_URI + "/detectors";
     public static final String RULE_BASE_URI = PLUGINS_BASE_URI + "/rules";
+    public static final String SECURITY_ANALYTICS_INDEX = ".opendistro-sa-config";
+    public static final String SECURITY_ANALYTICS_JOB_TYPE = "opendistro-security-analytics";
 
     private DetectorIndices detectorIndices;
 
@@ -105,7 +112,29 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin {
 
     private RuleIndices ruleIndices;
 
+    private UbeaRunner ubeaRunner;
+
     private DetectorIndexManagementService detectorIndexManagementService;
+
+    @Override
+    public String getJobType() {
+        return SECURITY_ANALYTICS_JOB_TYPE;
+    }
+
+    @Override
+    public String getJobIndex() {
+        return SECURITY_ANALYTICS_INDEX;
+    }
+
+    @Override
+    public ScheduledJobRunner getJobRunner() {
+        return new SecurityAnalyticsRunner();
+    }
+
+    @Override
+    public ScheduledJobParser getJobParser() {
+        return (xContentParser, id, jobDocVersion) -> new Ubea().parse(xContentParser, id, jobDocVersion.getSeqNo(), jobDocVersion.getPrimaryTerm());
+    }
 
     @Override
     public Collection<Object> createComponents(Client client,
@@ -123,7 +152,8 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin {
         ruleTopicIndices = new RuleTopicIndices(client, clusterService);
         mapperService = new MapperService(client.admin().indices());
         ruleIndices = new RuleIndices(client, clusterService, threadPool);
-        return List.of(detectorIndices, ruleTopicIndices, ruleIndices, mapperService);
+        ubeaRunner = new UbeaRunner();
+        return List.of(detectorIndices, ruleTopicIndices, ruleIndices, mapperService, ubeaRunner);
     }
 
     @Override
