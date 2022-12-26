@@ -133,7 +133,7 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
 
     @Override
     public ScheduledJobParser getJobParser() {
-        return (xContentParser, id, jobDocVersion) -> new Ubea().parse(xContentParser, id, jobDocVersion.getSeqNo(), jobDocVersion.getPrimaryTerm());
+        return (xContentParser, id, jobDocVersion) -> Ubea.parse(xContentParser, id, jobDocVersion.getSeqNo(), jobDocVersion.getPrimaryTerm());
     }
 
     @Override
