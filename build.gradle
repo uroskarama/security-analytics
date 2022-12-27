@@ -52,8 +52,7 @@ ext {
     licenseFile = rootProject.file('LICENSE')
     noticeFile = rootProject.file('NOTICE')
 }
-
-licenseHeaders.enabled = false
+licenseHeaders.enabled = true
 testingConventions.enabled = false
 forbiddenApis.ignoreFailures = false
 
@@ -169,6 +168,7 @@ integTest {
     systemProperty 'java.io.tmpdir', es_tmp_dir.absolutePath
 
     systemProperty "https", System.getProperty("https")
+    systemProperty "security", System.getProperty("security")
     systemProperty "user", System.getProperty("user")
     systemProperty "password", System.getProperty("password")
 
@@ -209,10 +209,6 @@ integTest {
 }
 Zip bundle = (Zip) project.getTasks().getByName("bundlePlugin");
 integTest.dependsOn(bundle)
-integTest.getClusters().forEach{c -> {
-    c.plugin(project.getObjects().fileProperty().value(bundle.getArchiveFile()))
-}}
-
 String alertingFilePath = "src/test/resources/alerting"
 String alertingPlugin = "opensearch-alerting-" + plugin_no_snapshot + ".zip"
 String alertingRemoteFile = "https://ci.opensearch.org/ci/dbc/distribution-build-opensearch/" + opensearch_no_snapshot + "/latest/linux/x64/tar/builds/opensearch/plugins/" + alertingPlugin
@@ -242,6 +238,22 @@ testClusters.integTest {
         }
     }
     setting 'path.repo', repo.absolutePath
+    plugin(provider({
+        new RegularFile() {
+            @Override
+            File getAsFile() {
+                File dir = new File(rootDir.path + "/" + jobSchedulerFilePath)
+                if (!dir.exists()) {
+                    dir.mkdirs()
+                }
+                File f = new File(dir, jobSchedulerPlugin)
+                if (!f.exists()) {
+                    new URL(jobSchedulerRemoteFile).withInputStream{ ins -> f.withOutputStream{ it << ins }}
+                }
+                fileTree(jobSchedulerFilePath).getSingleFile()
+            }
+        }
+    }))
     plugin(provider({
         new RegularFile() {
             @Override
@@ -296,24 +308,7 @@ testClusters.integTest {
             }
         }
     }))
-    plugin(provider({
-        new RegularFile() {
-            @Override
-            File getAsFile() {
-                File dir = new File(rootDir.path + "/" + jobSchedulerFilePath)
-
-                if (!dir.exists()) {
-                    dir.mkdirs()
-                }
-
-                File f = new File(dir, jobSchedulerPlugin)
-                if (!f.exists()) {
-                    new URL(jobSchedulerRemoteFile).withInputStream{ ins -> f.withOutputStream{ it << ins }}
-                }
-                fileTree(jobSchedulerFilePath).getSingleFile()
-            }
-        }
-    }))
+    plugin(project.tasks.bundlePlugin.archiveFile)
 }
 
 run {
@@ -334,6 +329,7 @@ task integTestRemote(type: RestIntegTestTask) {
     systemProperty 'java.io.tmpdir', opensearch_tmp_dir.absolutePath
 
     systemProperty "https", System.getProperty("https")
+    systemProperty "security", System.getProperty("security")
     systemProperty "user", System.getProperty("user")
     systemProperty "password", System.getProperty("password")
 

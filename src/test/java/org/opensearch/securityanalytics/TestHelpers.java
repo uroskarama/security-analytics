@@ -25,6 +25,7 @@ import org.opensearch.securityanalytics.model.Detector;
 import org.opensearch.securityanalytics.model.DetectorInput;
 import org.opensearch.securityanalytics.model.DetectorRule;
 import org.opensearch.securityanalytics.model.DetectorTrigger;
+import org.opensearch.securityanalytics.ubea.Ubea;
 import org.opensearch.test.OpenSearchTestCase;
 import org.opensearch.test.rest.OpenSearchRestTestCase;
 
@@ -1608,5 +1609,22 @@ public class TestHelpers {
 
     public static XContentBuilder builder() throws IOException {
         return XContentBuilder.builder(XContentType.JSON.xContent());
+    }
+
+    public static Ubea randomUbeaJob() {
+        boolean enabled = OpenSearchTestCase.randomBoolean();
+        Instant enabledTime = null;
+        if (enabled) {
+            enabledTime = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+        }
+        return new Ubea(
+                OpenSearchRestTestCase.randomAlphaOfLength(10),
+                enabled,
+                Instant.now().truncatedTo(ChronoUnit.MILLIS),
+                enabledTime,
+                new  org.opensearch.jobscheduler.spi.schedule.IntervalSchedule(Instant.now().truncatedTo(ChronoUnit.MILLIS), 5, ChronoUnit.MINUTES),
+                OpenSearchTestCase.randomLong(),
+                OpenSearchTestCase.randomLong()
+        );
     }
 }

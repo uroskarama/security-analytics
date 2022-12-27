@@ -10,6 +10,7 @@ import org.opensearch.jobscheduler.spi.schedule.ScheduleParser;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.Locale;
+import java.util.Objects;
 
 public class Ubea implements ScheduledJobParameter {
     public static final String LAST_UPDATE_TIME_FIELD = "last_update_time";
@@ -71,7 +72,6 @@ public class Ubea implements ScheduledJobParameter {
         } else {
             builder.timeField(LAST_UPDATE_TIME_FIELD, String.format(Locale.getDefault(), "%s_in_millis", LAST_UPDATE_TIME_FIELD), lastUpdateTime.toEpochMilli());
         }
-        builder.field(ENABLED_FIELD, enabled);
         return builder.endObject();
     }
 
@@ -127,5 +127,18 @@ public class Ubea implements ScheduledJobParameter {
         }
 
         return new Ubea(id, enabled, lastUpdateTime, enabledTime, schedule, seqNo, primaryTerm);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ubea ubea = (Ubea) o;
+        return Objects.equals(id, ubea.id) && Objects.equals(enabled, ubea.enabled) && Objects.equals(lastUpdateTime, ubea.lastUpdateTime) && Objects.equals(enabledTime, ubea.enabledTime) && Objects.equals(schedule, ubea.schedule);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, enabled, lastUpdateTime, enabledTime, schedule);
     }
 }

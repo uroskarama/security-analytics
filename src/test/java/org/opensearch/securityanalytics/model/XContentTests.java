@@ -9,17 +9,13 @@ import java.util.List;
 import org.junit.Assert;
 import org.opensearch.common.bytes.BytesReference;
 import org.opensearch.common.xcontent.ToXContent;
+import org.opensearch.common.xcontent.XContentBuilder;
+import org.opensearch.common.xcontent.XContentFactory;
 import org.opensearch.commons.authuser.User;
+import org.opensearch.securityanalytics.ubea.Ubea;
 import org.opensearch.test.OpenSearchTestCase;
 
-
-import static org.opensearch.securityanalytics.TestHelpers.builder;
-import static org.opensearch.securityanalytics.TestHelpers.parser;
-import static org.opensearch.securityanalytics.TestHelpers.randomDetector;
-import static org.opensearch.securityanalytics.TestHelpers.randomDetectorWithNoUser;
-import static org.opensearch.securityanalytics.TestHelpers.randomUser;
-import static org.opensearch.securityanalytics.TestHelpers.randomUserEmpty;
-import static org.opensearch.securityanalytics.TestHelpers.toJsonStringWithUser;
+import static org.opensearch.securityanalytics.TestHelpers.*;
 
 public class XContentTests extends OpenSearchTestCase {
 
@@ -192,5 +188,18 @@ public class XContentTests extends OpenSearchTestCase {
         String detectorString = toJsonStringWithUser(detector);
         Detector parsedDetector = Detector.parse(parser(detectorString), null, null);
         Assert.assertEquals("Round tripping Detector doesn't work", detector, parsedDetector);
+    }
+
+    public void testUebaJobParsing() throws IOException {
+        Ubea ubeaJob = randomUbeaJob();
+
+        XContentBuilder builder = XContentFactory.jsonBuilder();
+        builder = ubeaJob.toXContent(builder, ToXContent.EMPTY_PARAMS);
+        String ubeaJobString = BytesReference.bytes(builder).utf8ToString();
+
+        Ubea parsedUbeaJob = Ubea.parse(parser(ubeaJobString), ubeaJob.getName(), null, null);
+
+        Assert.assertEquals("Round tripping Ubea doesn't work", ubeaJob, parsedUbeaJob);
+
     }
 }
