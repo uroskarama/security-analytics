@@ -12,7 +12,7 @@ import org.opensearch.common.xcontent.ToXContent;
 import org.opensearch.common.xcontent.XContentBuilder;
 import org.opensearch.common.xcontent.XContentFactory;
 import org.opensearch.commons.authuser.User;
-import org.opensearch.securityanalytics.ueba.UebaAggregator;
+import org.opensearch.securityanalytics.ueba.aggregator.UebaAggregator;
 import org.opensearch.test.OpenSearchTestCase;
 
 import static org.opensearch.securityanalytics.TestHelpers.*;

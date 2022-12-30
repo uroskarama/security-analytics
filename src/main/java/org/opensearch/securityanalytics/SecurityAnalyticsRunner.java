@@ -5,10 +5,10 @@ import org.apache.logging.log4j.Logger;
 import org.opensearch.jobscheduler.spi.JobExecutionContext;
 import org.opensearch.jobscheduler.spi.ScheduledJobParameter;
 import org.opensearch.jobscheduler.spi.ScheduledJobRunner;
-import org.opensearch.securityanalytics.ueba.UebaAggregator;
-import org.opensearch.securityanalytics.ueba.UebaAggregatorRunner;
-import org.opensearch.securityanalytics.ueba.UebaMlScheduler;
-import org.opensearch.securityanalytics.ueba.UebaMlSchedulerRunner;
+import org.opensearch.securityanalytics.ueba.aggregator.UebaAggregator;
+import org.opensearch.securityanalytics.ueba.aggregator.UebaAggregatorRunner;
+import org.opensearch.securityanalytics.ueba.mlscheduler.UebaMlScheduler;
+import org.opensearch.securityanalytics.ueba.mlscheduler.UebaMlSchedulerRunner;
 
 public class SecurityAnalyticsRunner implements ScheduledJobRunner {
 

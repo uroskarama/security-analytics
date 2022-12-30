@@ -11,6 +11,7 @@ import org.opensearch.commons.alerting.util.IndexUtilsKt;
 import org.opensearch.jobscheduler.spi.schedule.IntervalSchedule;
 import org.opensearch.search.SearchHit;
 import org.opensearch.securityanalytics.SecurityAnalyticsRestTestCase;
+import org.opensearch.securityanalytics.ueba.aggregator.UebaAggregator;
 
 import java.io.IOException;
 import java.time.Instant;

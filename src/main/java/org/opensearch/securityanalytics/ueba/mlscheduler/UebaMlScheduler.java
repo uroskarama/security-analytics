@@ -1,4 +1,4 @@
-package org.opensearch.securityanalytics.ueba;
+package org.opensearch.securityanalytics.ueba.mlscheduler;
 
 import org.opensearch.common.xcontent.XContentBuilder;
 import org.opensearch.common.xcontent.XContentParser;

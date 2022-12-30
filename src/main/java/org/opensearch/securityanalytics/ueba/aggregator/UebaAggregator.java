@@ -1,5 +1,7 @@
-package org.opensearch.securityanalytics.ueba;
+package org.opensearch.securityanalytics.ueba.aggregator;
 
+import org.opensearch.common.io.stream.StreamInput;
+import org.opensearch.common.io.stream.StreamOutput;
 import org.opensearch.common.xcontent.XContentBuilder;
 import org.opensearch.common.xcontent.XContentParser;
 import org.opensearch.common.xcontent.XContentParserUtils;
@@ -19,11 +21,11 @@ public class UebaAggregator implements ScheduledJobParameter {
     public static final String ENABLED_FIELD = "enabled";
     public static final String NO_ID = "";
 
-    private final String id;
-    private final Boolean enabled;
-    private final Instant lastUpdateTime;
-    private final Instant enabledTime;
-    private final Schedule schedule;
+    private String id;
+    private Boolean enabled;
+    private Instant lastUpdateTime;
+    private Instant enabledTime;
+    private Schedule schedule;
 
     public UebaAggregator(String id, Boolean enabled, Instant lastUpdateTime, Instant enabledTime, Schedule schedule, Long seqNo, Long primaryTerm) {
         this.id = id;
@@ -31,6 +33,13 @@ public class UebaAggregator implements ScheduledJobParameter {
         this.lastUpdateTime = lastUpdateTime;
         this.enabledTime = enabledTime;
         this.schedule = schedule;
+    }
+
+    public UebaAggregator(StreamInput sin) {
+    }
+
+    public static UebaAggregator readFrom(StreamInput sin) {
+        return new UebaAggregator(sin);
     }
 
     @Override
@@ -56,6 +65,10 @@ public class UebaAggregator implements ScheduledJobParameter {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public void setLastUpdateTime(Instant lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
     }
 
     @Override
@@ -140,5 +153,8 @@ public class UebaAggregator implements ScheduledJobParameter {
     @Override
     public int hashCode() {
         return Objects.hash(id, enabled, lastUpdateTime, enabledTime, schedule);
+    }
+
+    public void writeTo(StreamOutput out) {
     }
 }

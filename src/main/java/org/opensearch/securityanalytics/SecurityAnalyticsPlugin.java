@@ -84,8 +84,8 @@ import org.opensearch.securityanalytics.transport.TransportGetMappingsViewAction
 import org.opensearch.securityanalytics.transport.TransportIndexDetectorAction;
 import org.opensearch.securityanalytics.transport.TransportSearchDetectorAction;
 import org.opensearch.securityanalytics.transport.TransportValidateRulesAction;
-import org.opensearch.securityanalytics.ueba.UebaAggregator;
-import org.opensearch.securityanalytics.ueba.UebaAggregatorRunner;
+import org.opensearch.securityanalytics.ueba.aggregator.UebaAggregator;
+import org.opensearch.securityanalytics.ueba.aggregator.UebaAggregatorRunner;
 import org.opensearch.securityanalytics.util.DetectorIndices;
 import org.opensearch.securityanalytics.util.RuleIndices;
 import org.opensearch.securityanalytics.util.RuleTopicIndices;
@@ -101,6 +101,8 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
     public static final String ALERTS_BASE_URI = PLUGINS_BASE_URI + "/alerts";
     public static final String DETECTOR_BASE_URI = PLUGINS_BASE_URI + "/detectors";
     public static final String RULE_BASE_URI = PLUGINS_BASE_URI + "/rules";
+
+    public static final String UEBA_AGGREGATOR_BASE_URI = PLUGINS_BASE_URI + "/ueba/aggregator";
     public static final String SECURITY_ANALYTICS_JOB_INDEX = ".opendistro-sa-config";
     public static final String SECURITY_ANALYTICS_JOB_TYPE = "opendistro-security-analytics";
 

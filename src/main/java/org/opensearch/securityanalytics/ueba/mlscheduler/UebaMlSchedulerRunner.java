@@ -1,4 +1,4 @@
-package org.opensearch.securityanalytics.ueba;
+package org.opensearch.securityanalytics.ueba.mlscheduler;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
