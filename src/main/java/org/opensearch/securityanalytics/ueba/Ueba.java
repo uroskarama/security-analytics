@@ -1,4 +1,4 @@
-package org.opensearch.securityanalytics.ubea;
+package org.opensearch.securityanalytics.ueba;
 
 import org.opensearch.common.xcontent.XContentBuilder;
 import org.opensearch.common.xcontent.XContentParser;
@@ -12,7 +12,7 @@ import java.time.Instant;
 import java.util.Locale;
 import java.util.Objects;
 
-public class Ubea implements ScheduledJobParameter {
+public class Ueba implements ScheduledJobParameter {
     public static final String LAST_UPDATE_TIME_FIELD = "last_update_time";
     public static final String ENABLED_TIME_FIELD = "enabled_time";
     public static final String SCHEDULE_FIELD = "schedule";
@@ -25,7 +25,7 @@ public class Ubea implements ScheduledJobParameter {
     private final Instant enabledTime;
     private final Schedule schedule;
 
-    public Ubea(String id, Boolean enabled, Instant lastUpdateTime, Instant enabledTime, Schedule schedule, Long seqNo, Long primaryTerm) {
+    public Ueba(String id, Boolean enabled, Instant lastUpdateTime, Instant enabledTime, Schedule schedule, Long seqNo, Long primaryTerm) {
         this.id = id;
         this.enabled = enabled;
         this.lastUpdateTime = lastUpdateTime;
@@ -75,7 +75,7 @@ public class Ubea implements ScheduledJobParameter {
         return builder.endObject();
     }
 
-    public static Ubea parse(XContentParser xcp, String id, Long seqNo, Long primaryTerm) throws IOException {
+    public static Ueba parse(XContentParser xcp, String id, Long seqNo, Long primaryTerm) throws IOException {
         if (id == null) {
             id = NO_ID;
         }
@@ -126,15 +126,15 @@ public class Ubea implements ScheduledJobParameter {
             enabledTime = null;
         }
 
-        return new Ubea(id, enabled, lastUpdateTime, enabledTime, schedule, seqNo, primaryTerm);
+        return new Ueba(id, enabled, lastUpdateTime, enabledTime, schedule, seqNo, primaryTerm);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Ubea ubea = (Ubea) o;
-        return Objects.equals(id, ubea.id) && Objects.equals(enabled, ubea.enabled) && Objects.equals(lastUpdateTime, ubea.lastUpdateTime) && Objects.equals(enabledTime, ubea.enabledTime) && Objects.equals(schedule, ubea.schedule);
+        Ueba ueba = (Ueba) o;
+        return Objects.equals(id, ueba.id) && Objects.equals(enabled, ueba.enabled) && Objects.equals(lastUpdateTime, ueba.lastUpdateTime) && Objects.equals(enabledTime, ueba.enabledTime) && Objects.equals(schedule, ueba.schedule);
     }
 
     @Override

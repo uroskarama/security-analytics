@@ -84,8 +84,8 @@ import org.opensearch.securityanalytics.transport.TransportGetMappingsViewAction
 import org.opensearch.securityanalytics.transport.TransportIndexDetectorAction;
 import org.opensearch.securityanalytics.transport.TransportSearchDetectorAction;
 import org.opensearch.securityanalytics.transport.TransportValidateRulesAction;
-import org.opensearch.securityanalytics.ubea.Ubea;
-import org.opensearch.securityanalytics.ubea.UbeaRunner;
+import org.opensearch.securityanalytics.ueba.Ueba;
+import org.opensearch.securityanalytics.ueba.UebaRunner;
 import org.opensearch.securityanalytics.util.DetectorIndices;
 import org.opensearch.securityanalytics.util.RuleIndices;
 import org.opensearch.securityanalytics.util.RuleTopicIndices;
@@ -101,7 +101,7 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
     public static final String ALERTS_BASE_URI = PLUGINS_BASE_URI + "/alerts";
     public static final String DETECTOR_BASE_URI = PLUGINS_BASE_URI + "/detectors";
     public static final String RULE_BASE_URI = PLUGINS_BASE_URI + "/rules";
-    public static final String SECURITY_ANALYTICS_INDEX = ".opendistro-sa-config";
+    public static final String SECURITY_ANALYTICS_JOB_INDEX = ".opendistro-sa-config";
     public static final String SECURITY_ANALYTICS_JOB_TYPE = "opendistro-security-analytics";
 
     private DetectorIndices detectorIndices;
@@ -112,7 +112,7 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
 
     private RuleIndices ruleIndices;
 
-    private UbeaRunner ubeaRunner;
+    private UebaRunner uebaRunner;
 
     private DetectorIndexManagementService detectorIndexManagementService;
 
@@ -123,7 +123,7 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
 
     @Override
     public String getJobIndex() {
-        return SECURITY_ANALYTICS_INDEX;
+        return SECURITY_ANALYTICS_JOB_INDEX;
     }
 
     @Override
@@ -133,7 +133,7 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
 
     @Override
     public ScheduledJobParser getJobParser() {
-        return (xContentParser, id, jobDocVersion) -> Ubea.parse(xContentParser, id, jobDocVersion.getSeqNo(), jobDocVersion.getPrimaryTerm());
+        return (xContentParser, id, jobDocVersion) -> Ueba.parse(xContentParser, id, jobDocVersion.getSeqNo(), jobDocVersion.getPrimaryTerm());
     }
 
     @Override
@@ -152,8 +152,8 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
         ruleTopicIndices = new RuleTopicIndices(client, clusterService);
         mapperService = new MapperService(client.admin().indices());
         ruleIndices = new RuleIndices(client, clusterService, threadPool);
-        ubeaRunner = new UbeaRunner();
-        return List.of(detectorIndices, ruleTopicIndices, ruleIndices, mapperService, ubeaRunner);
+        uebaRunner = new UebaRunner();
+        return List.of(detectorIndices, ruleTopicIndices, ruleIndices, mapperService, uebaRunner);
     }
 
     @Override
