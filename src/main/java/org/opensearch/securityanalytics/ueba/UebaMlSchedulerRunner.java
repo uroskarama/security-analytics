@@ -7,7 +7,7 @@ import org.opensearch.jobscheduler.spi.ScheduledJobParameter;
 import org.opensearch.jobscheduler.spi.ScheduledJobRunner;
 import org.opensearch.securityanalytics.action.ValidateRulesRequest;
 
-public class UebaRunner implements ScheduledJobRunner {
+public class UebaMlSchedulerRunner implements ScheduledJobRunner {
     private static final Logger log = LogManager.getLogger(ValidateRulesRequest.class);
 
     @Override

@@ -12,7 +12,7 @@ import org.opensearch.common.xcontent.ToXContent;
 import org.opensearch.common.xcontent.XContentBuilder;
 import org.opensearch.common.xcontent.XContentFactory;
 import org.opensearch.commons.authuser.User;
-import org.opensearch.securityanalytics.ueba.Ueba;
+import org.opensearch.securityanalytics.ueba.UebaAggregator;
 import org.opensearch.test.OpenSearchTestCase;
 
 import static org.opensearch.securityanalytics.TestHelpers.*;
@@ -191,15 +191,15 @@ public class XContentTests extends OpenSearchTestCase {
     }
 
     public void testUebaJobParsing() throws IOException {
-        Ueba uebaJob = randomUebaJob();
+        UebaAggregator uebaAggregatorJob = randomUebaJob();
 
         XContentBuilder builder = XContentFactory.jsonBuilder();
-        builder = uebaJob.toXContent(builder, ToXContent.EMPTY_PARAMS);
+        builder = uebaAggregatorJob.toXContent(builder, ToXContent.EMPTY_PARAMS);
         String uebaJobString = BytesReference.bytes(builder).utf8ToString();
 
-        Ueba parsedUebaJob = Ueba.parse(parser(uebaJobString), uebaJob.getName(), null, null);
+        UebaAggregator parsedUebaJobAggregator = UebaAggregator.parse(parser(uebaJobString), uebaAggregatorJob.getName(), null, null);
 
-        Assert.assertEquals("Round tripping Ueba doesn't work", uebaJob, parsedUebaJob);
+        Assert.assertEquals("Round tripping Ueba doesn't work", uebaAggregatorJob, parsedUebaJobAggregator);
 
     }
 }

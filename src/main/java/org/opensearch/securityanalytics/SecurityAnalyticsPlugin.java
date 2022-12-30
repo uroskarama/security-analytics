@@ -84,8 +84,8 @@ import org.opensearch.securityanalytics.transport.TransportGetMappingsViewAction
 import org.opensearch.securityanalytics.transport.TransportIndexDetectorAction;
 import org.opensearch.securityanalytics.transport.TransportSearchDetectorAction;
 import org.opensearch.securityanalytics.transport.TransportValidateRulesAction;
-import org.opensearch.securityanalytics.ueba.Ueba;
-import org.opensearch.securityanalytics.ueba.UebaRunner;
+import org.opensearch.securityanalytics.ueba.UebaAggregator;
+import org.opensearch.securityanalytics.ueba.UebaAggregatorRunner;
 import org.opensearch.securityanalytics.util.DetectorIndices;
 import org.opensearch.securityanalytics.util.RuleIndices;
 import org.opensearch.securityanalytics.util.RuleTopicIndices;
@@ -112,7 +112,7 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
 
     private RuleIndices ruleIndices;
 
-    private UebaRunner uebaRunner;
+    private UebaAggregatorRunner uebaAggregatorRunner;
 
     private DetectorIndexManagementService detectorIndexManagementService;
 
@@ -133,7 +133,7 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
 
     @Override
     public ScheduledJobParser getJobParser() {
-        return (xContentParser, id, jobDocVersion) -> Ueba.parse(xContentParser, id, jobDocVersion.getSeqNo(), jobDocVersion.getPrimaryTerm());
+        return (xContentParser, id, jobDocVersion) -> UebaAggregator.parse(xContentParser, id, jobDocVersion.getSeqNo(), jobDocVersion.getPrimaryTerm());
     }
 
     @Override
@@ -152,8 +152,8 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
         ruleTopicIndices = new RuleTopicIndices(client, clusterService);
         mapperService = new MapperService(client.admin().indices());
         ruleIndices = new RuleIndices(client, clusterService, threadPool);
-        uebaRunner = new UebaRunner();
-        return List.of(detectorIndices, ruleTopicIndices, ruleIndices, mapperService, uebaRunner);
+        uebaAggregatorRunner = new UebaAggregatorRunner();
+        return List.of(detectorIndices, ruleTopicIndices, ruleIndices, mapperService, uebaAggregatorRunner);
     }
 
     @Override

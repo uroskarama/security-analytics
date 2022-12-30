@@ -17,7 +17,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-public class UebaRunnerIT extends SecurityAnalyticsRestTestCase {
+public class UebaAggregatorRunnerIT extends SecurityAnalyticsRestTestCase {
 
     public void testRunUebaJob_success() throws IOException {
 
@@ -25,10 +25,10 @@ public class UebaRunnerIT extends SecurityAnalyticsRestTestCase {
         String index = ".opendistro-sa-config";
 
         String testId = "testId";
-        Ueba uebaJob = new Ueba(testId, true, Instant.now(), Instant.now(), new IntervalSchedule(Instant.now(), 5,  ChronoUnit.MINUTES), 5L, 5L);
+        UebaAggregator uebaAggregatorJob = new UebaAggregator(testId, true, Instant.now(), Instant.now(), new IntervalSchedule(Instant.now(), 5,  ChronoUnit.MINUTES), 5L, 5L);
         XContentBuilder builder = XContentFactory.jsonBuilder();
 
-        String uebaJobJson = IndexUtilsKt.string(shuffleXContent(uebaJob.toXContent(builder, ToXContent.EMPTY_PARAMS)));
+        String uebaJobJson = IndexUtilsKt.string(shuffleXContent(uebaAggregatorJob.toXContent(builder, ToXContent.EMPTY_PARAMS)));
         Request createUebaJobRequest = new Request("POST", index + "/_doc");
         createUebaJobRequest.setJsonEntity(
                 uebaJobJson
