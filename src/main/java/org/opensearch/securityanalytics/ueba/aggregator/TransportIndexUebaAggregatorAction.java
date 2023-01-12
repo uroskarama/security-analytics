@@ -76,7 +76,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
-public class TransportIndexUebaAggregatorAction extends HandledTransportAction<IndexDetectorRequest, IndexDetectorResponse> implements SecureTransportAction {
+public class TransportIndexUebaAggregatorAction extends HandledTransportAction<IndexUebaAggregatorRequest, IndexUebaAggregatorResponse> implements SecureTransportAction {
 
     public static final String PLUGIN_OWNER_FIELD = "security_analytics";
     private static final Logger log = LogManager.getLogger(TransportIndexUebaAggregatorAction.class);
@@ -117,7 +117,7 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
                                               ClusterService clusterService,
                                               Settings settings,
                                               NamedWriteableRegistry namedWriteableRegistry) {
-        super(IndexDetectorAction.NAME, transportService, actionFilters, IndexDetectorRequest::new);
+        super(IndexUebaAggregatorAction.NAME, transportService, actionFilters, IndexUebaAggregatorRequest::new);
         this.client = client;
         this.xContentRegistry = xContentRegistry;
         this.detectorIndices = detectorIndices;
@@ -136,7 +136,7 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
     }
 
     @Override
-    protected void doExecute(Task task, IndexDetectorRequest request, ActionListener<IndexDetectorResponse> listener) {
+    protected void doExecute(Task task, IndexUebaAggregatorRequest request, ActionListener<IndexUebaAggregatorResponse> listener) {
         User user = readUserFromThreadContext(this.threadPool);
 
         String validateBackendRoleMessage = validateUserBackendRoles(user, this.filterByEnabled);
@@ -548,15 +548,15 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
     }
 
     class AsyncIndexDetectorsAction {
-        private final IndexDetectorRequest request;
+        private final IndexUebaAggregatorRequest request;
 
-        private final ActionListener<IndexDetectorResponse> listener;
+        private final ActionListener<IndexUebaAggregatorResponse> listener;
         private final AtomicReference<Object> response;
         private final AtomicBoolean counter = new AtomicBoolean();
         private final Task task;
         private final User user;
 
-        AsyncIndexDetectorsAction(User user, Task task, IndexDetectorRequest request, ActionListener<IndexDetectorResponse> listener) {
+        AsyncIndexDetectorsAction(User user, Task task, IndexUebaAggregatorRequest request, ActionListener<IndexUebaAggregatorResponse> listener) {
             this.task = task;
             this.request = request;
             this.listener = listener;
@@ -625,22 +625,24 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
         }
 
         void createDetector() {
-            Detector detector = request.getDetector();
+            UebaAggregator detector = request.getUebaAggregator();
+/*
             String ruleTopic = detector.getDetectorType();
+*/
 
-            request.getDetector().setAlertsIndex(DetectorMonitorConfig.getAlertsIndex(ruleTopic));
-            request.getDetector().setAlertsHistoryIndex(DetectorMonitorConfig.getAlertsHistoryIndex(ruleTopic));
-            request.getDetector().setAlertsHistoryIndexPattern(DetectorMonitorConfig.getAlertsHistoryIndexPattern(ruleTopic));
-            request.getDetector().setFindingsIndex(DetectorMonitorConfig.getFindingsIndex(ruleTopic));
-            request.getDetector().setFindingsIndexPattern(DetectorMonitorConfig.getFindingsIndexPattern(ruleTopic));
-            request.getDetector().setRuleIndex(DetectorMonitorConfig.getRuleIndex(ruleTopic));
+/*            request.getUebaAggregator().setAlertsIndex(DetectorMonitorConfig.getAlertsIndex(ruleTopic));
+            request.getUebaAggregator().setAlertsHistoryIndex(DetectorMonitorConfig.getAlertsHistoryIndex(ruleTopic));
+            request.getUebaAggregator().setAlertsHistoryIndexPattern(DetectorMonitorConfig.getAlertsHistoryIndexPattern(ruleTopic));
+            request.getUebaAggregator().setFindingsIndex(DetectorMonitorConfig.getFindingsIndex(ruleTopic));
+            request.getUebaAggregator().setFindingsIndexPattern(DetectorMonitorConfig.getFindingsIndexPattern(ruleTopic));
+            request.getUebaAggregator().setRuleIndex(DetectorMonitorConfig.getRuleIndex(ruleTopic));
 
             User originalContextUser = this.user;
             log.debug("user from original context is {}", originalContextUser);
-            request.getDetector().setUser(originalContextUser);
+            request.getUebaAggregator().setUser(originalContextUser);*/
 
 
-            if (!detector.getInputs().isEmpty()) {
+/*            if (!detector.getInputs().isEmpty()) {
                 try {
                     ruleTopicIndices.initRuleTopicIndex(detector.getRuleIndex(), new ActionListener<>() {
                         @Override
@@ -649,8 +651,8 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
                             initRuleIndexAndImportRules(request, new ActionListener<>() {
                                 @Override
                                 public void onResponse(List<IndexMonitorResponse> monitorResponses) {
-                                    request.getDetector().setMonitorIds(getMonitorIds(monitorResponses));
-                                    request.getDetector().setRuleIdMonitorIdMap(mapMonitorIds(monitorResponses));
+*//*                                    request.getUebaAggregator().setMonitorIds(getMonitorIds(monitorResponses));
+                                    request.getUebaAggregator().setRuleIdMonitorIdMap(mapMonitorIds(monitorResponses));*//*
                                     try {
                                         indexDetector();
                                     } catch (IOException e) {
@@ -673,11 +675,11 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
                 } catch (IOException e) {
                     onFailures(e);
                 }
-            }
+            }*/
         }
 
         void updateDetector() {
-            String id = request.getDetectorId();
+            String id = request.getAggregatorId();
 
             User originalContextUser = this.user;
             log.debug("user from original context is {}", originalContextUser);
@@ -697,10 +699,11 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
                                 response.getSourceAsBytesRef(), XContentType.JSON
                         );
 
-                        Detector detector = Detector.docParse(xcp, response.getId(), response.getVersion());
+                        // TODO: docParse
+                        UebaAggregator detector = null;
 
                         // security is enabled and filterby is enabled
-                        if (!checkUserPermissionsWithResource(
+/*                        if (!checkUserPermissionsWithResource(
                                 originalContextUser,
                                 detector.getUser(),
                                 "detector",
@@ -712,7 +715,7 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
                             onFailure(SecurityAnalyticsException.wrap(new OpenSearchStatusException("Do not have permissions to resource", RestStatus.FORBIDDEN)));
                             return;
                         }
-                        onGetResponse(detector, detector.getUser());
+                        onGetResponse(detector, detector.getUser());*/
                     } catch (IOException e) {
                         onFailures(e);
                     }
@@ -725,12 +728,12 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
             });
         }
 
-        void onGetResponse(Detector currentDetector, User user) {
-            if (request.getDetector().getEnabled() && currentDetector.getEnabled()) {
-                request.getDetector().setEnabledTime(currentDetector.getEnabledTime());
+        void onGetResponse(UebaAggregator currentDetector, User user) {
+            if (request.getUebaAggregator().getEnabled() && currentDetector.getEnabled()) {
+                request.getUebaAggregator().setEnabledTime(currentDetector.getEnabledTime());
             }
-            request.getDetector().setMonitorIds(currentDetector.getMonitorIds());
-            request.getDetector().setRuleIdMonitorIdMap(currentDetector.getRuleIdMonitorIdMap());
+/*            request.getUebaAggregator().setMonitorIds(currentDetector.getMonitorIds());
+            request.getUebaAggregator().setRuleIdMonitorIdMap(currentDetector.getRuleIdMonitorIdMap());
             Detector detector = request.getDetector();
 
             String ruleTopic = detector.getDetectorType();
@@ -738,15 +741,15 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
             log.debug("user in update detector {}", user);
 
 
-            request.getDetector().setAlertsIndex(DetectorMonitorConfig.getAlertsIndex(ruleTopic));
-            request.getDetector().setAlertsHistoryIndex(DetectorMonitorConfig.getAlertsHistoryIndex(ruleTopic));
-            request.getDetector().setAlertsHistoryIndexPattern(DetectorMonitorConfig.getAlertsHistoryIndexPattern(ruleTopic));
-            request.getDetector().setFindingsIndex(DetectorMonitorConfig.getFindingsIndex(ruleTopic));
-            request.getDetector().setFindingsIndexPattern(DetectorMonitorConfig.getFindingsIndexPattern(ruleTopic));
-            request.getDetector().setRuleIndex(DetectorMonitorConfig.getRuleIndex(ruleTopic));
-            request.getDetector().setUser(user);
+            request.getUebaAggregator().setAlertsIndex(DetectorMonitorConfig.getAlertsIndex(ruleTopic));
+            request.getUebaAggregator().setAlertsHistoryIndex(DetectorMonitorConfig.getAlertsHistoryIndex(ruleTopic));
+            request.getUebaAggregator().setAlertsHistoryIndexPattern(DetectorMonitorConfig.getAlertsHistoryIndexPattern(ruleTopic));
+            request.getUebaAggregator().setFindingsIndex(DetectorMonitorConfig.getFindingsIndex(ruleTopic));
+            request.getUebaAggregator().setFindingsIndexPattern(DetectorMonitorConfig.getFindingsIndexPattern(ruleTopic));
+            request.getUebaAggregator().setRuleIndex(DetectorMonitorConfig.getRuleIndex(ruleTopic));
+            request.getUebaAggregator().setUser(user);*/
 
-            if (!detector.getInputs().isEmpty()) {
+/*            if (!detector.getInputs().isEmpty()) {
                 try {
                     ruleTopicIndices.initRuleTopicIndex(detector.getRuleIndex(), new ActionListener<>() {
                         @Override
@@ -754,8 +757,8 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
                             initRuleIndexAndImportRules(request, new ActionListener<>() {
                                 @Override
                                 public void onResponse(List<IndexMonitorResponse> monitorResponses) {
-                                    request.getDetector().setMonitorIds(getMonitorIds(monitorResponses));
-                                    request.getDetector().setRuleIdMonitorIdMap(mapMonitorIds(monitorResponses));
+                                    request.getUebaAggregator().setMonitorIds(getMonitorIds(monitorResponses));
+                                    request.getUebaAggregator().setRuleIdMonitorIdMap(mapMonitorIds(monitorResponses));
                                     try {
                                         indexDetector();
                                     } catch (IOException e) {
@@ -778,7 +781,7 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
                 } catch (IOException e) {
                     onFailures(e);
                 }
-            }
+            }*/
         }
 
         public void initRuleIndexAndImportRules(IndexDetectorRequest request, ActionListener<List<IndexMonitorResponse>> listener) {
@@ -1014,20 +1017,20 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
             if (request.getMethod() == Method.POST) {
                 indexRequest = new IndexRequest(Detector.DETECTORS_INDEX)
                         .setRefreshPolicy(request.getRefreshPolicy())
-                        .source(request.getDetector().toXContentWithUser(XContentFactory.jsonBuilder(), new ToXContent.MapParams(Map.of("with_type", "true"))))
+                        .source(request.getUebaAggregator().toXContent(XContentFactory.jsonBuilder(), new ToXContent.MapParams(Map.of("with_type", "true"))))
                         .timeout(indexTimeout);
             } else {
                 indexRequest = new IndexRequest(Detector.DETECTORS_INDEX)
                         .setRefreshPolicy(request.getRefreshPolicy())
-                        .source(request.getDetector().toXContentWithUser(XContentFactory.jsonBuilder(), new ToXContent.MapParams(Map.of("with_type", "true"))))
-                        .id(request.getDetectorId())
+                        .source(request.getUebaAggregator().toXContent(XContentFactory.jsonBuilder(), new ToXContent.MapParams(Map.of("with_type", "true"))))
+                        .id(request.getAggregatorId())
                         .timeout(indexTimeout);
             }
 
             client.index(indexRequest, new ActionListener<>() {
                 @Override
                 public void onResponse(IndexResponse response) {
-                    Detector responseDetector = request.getDetector();
+                    UebaAggregator responseDetector = request.getUebaAggregator();
                     responseDetector.setId(response.getId());
                     onOperation(response, responseDetector);
                 }
@@ -1039,7 +1042,7 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
             });
         }
 
-        private void onOperation(IndexResponse response, Detector detector) {
+        private void onOperation(IndexResponse response, UebaAggregator detector) {
             this.response.set(response);
             if (counter.compareAndSet(false, true)) {
                 finishHim(detector, null);
@@ -1052,12 +1055,12 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
             }
         }
 
-        private void finishHim(Detector detector, Exception t) {
+        private void finishHim(UebaAggregator detector, Exception t) {
             threadPool.executor(ThreadPool.Names.GENERIC).execute(ActionRunnable.supply(listener, () -> {
                 if (t != null) {
                     throw SecurityAnalyticsException.wrap(t);
                 } else {
-                    return new IndexDetectorResponse(detector.getId(), detector.getVersion(), request.getMethod() == Method.POST? RestStatus.CREATED: RestStatus.OK, detector);
+                    return new IndexUebaAggregatorResponse(detector.getId(), 11L, request.getMethod() == Method.POST? RestStatus.CREATED: RestStatus.OK, detector);
                 }
             }));
         }

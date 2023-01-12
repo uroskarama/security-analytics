@@ -42,6 +42,14 @@ public class UebaAggregator implements ScheduledJobParameter {
         return new UebaAggregator(sin);
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
     @Override
     public String getName() {
         return id;
@@ -69,6 +77,22 @@ public class UebaAggregator implements ScheduledJobParameter {
 
     public void setLastUpdateTime(Instant lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public void setEnabledTime(Instant enabledTime) {
+        this.enabledTime = enabledTime;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 
     @Override
