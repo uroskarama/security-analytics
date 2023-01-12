@@ -84,8 +84,11 @@ import org.opensearch.securityanalytics.transport.TransportGetMappingsViewAction
 import org.opensearch.securityanalytics.transport.TransportIndexDetectorAction;
 import org.opensearch.securityanalytics.transport.TransportSearchDetectorAction;
 import org.opensearch.securityanalytics.transport.TransportValidateRulesAction;
+import org.opensearch.securityanalytics.ueba.aggregator.AggregatorIndices;
+import org.opensearch.securityanalytics.ueba.aggregator.AggregatorService;
 import org.opensearch.securityanalytics.ueba.aggregator.UebaAggregator;
 import org.opensearch.securityanalytics.ueba.aggregator.UebaAggregatorRunner;
+import org.opensearch.securityanalytics.ueba.mlscheduler.UebaMlSchedulerRunner;
 import org.opensearch.securityanalytics.util.DetectorIndices;
 import org.opensearch.securityanalytics.util.RuleIndices;
 import org.opensearch.securityanalytics.util.RuleTopicIndices;
@@ -114,7 +117,9 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
 
     private RuleIndices ruleIndices;
 
-    private UebaAggregatorRunner uebaAggregatorRunner;
+    private AggregatorIndices aggregatorIndices;
+
+    private AggregatorService aggregatorService;
 
     private DetectorIndexManagementService detectorIndexManagementService;
 
@@ -130,7 +135,7 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
 
     @Override
     public ScheduledJobRunner getJobRunner() {
-        return new SecurityAnalyticsRunner();
+        return SecurityAnalyticsRunner.getJobRunnerInstance();
     }
 
     @Override
@@ -154,8 +159,14 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
         ruleTopicIndices = new RuleTopicIndices(client, clusterService);
         mapperService = new MapperService(client.admin().indices());
         ruleIndices = new RuleIndices(client, clusterService, threadPool);
-        uebaAggregatorRunner = new UebaAggregatorRunner();
-        return List.of(detectorIndices, ruleTopicIndices, ruleIndices, mapperService, uebaAggregatorRunner);
+        aggregatorIndices = new AggregatorIndices(client);
+        aggregatorService = new AggregatorService(client);
+
+        SecurityAnalyticsRunner securityAnalyticsRunner = SecurityAnalyticsRunner.getJobRunnerInstance();
+        securityAnalyticsRunner.setAggregatorRunner(new UebaAggregatorRunner(aggregatorService));
+        securityAnalyticsRunner.setMlSchedulerRunner(new UebaMlSchedulerRunner());
+
+        return List.of(detectorIndices, ruleTopicIndices, ruleIndices, mapperService, aggregatorIndices, aggregatorService);
     }
 
     @Override

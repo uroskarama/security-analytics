@@ -1624,7 +1624,10 @@ public class TestHelpers {
                 enabledTime,
                 new  org.opensearch.jobscheduler.spi.schedule.IntervalSchedule(Instant.now().truncatedTo(ChronoUnit.MILLIS), 5, ChronoUnit.MINUTES),
                 OpenSearchTestCase.randomLong(),
-                OpenSearchTestCase.randomLong()
+                OpenSearchTestCase.randomLong(),
+                "",  // FIXME
+                "",
+                ""
         );
     }
 }
