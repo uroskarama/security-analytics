@@ -1,0 +1,3366 @@
+[
+  {
+    "@timestamp": "2022-12-27T20:29:31.734Z",
+    "agent": {
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1"
+    },
+    "cloud": {
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1"
+    },
+    "event": {
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:29:33.794Z"
+    },
+    "host": {
+      "architecture": "x86_64",
+      "os": {
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366",
+        "type": "windows"
+      },
+      "name": "EC2AMAZ-QKFFDE6",
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6"
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t7\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-21-1045577849-1934089403-1939631254-500\n\tAccount Name:\t\tAdministrator\n\tAccount Domain:\t\tEC2AMAZ-QKFFDE6\n\tLogon ID:\t\t0x6A66EA\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x46c\n\tProcess Name:\t\tC:\\Windows\\System32\\svchost.exe\n\nNetwork Information:\n\tWorkstation Name:\tEC2AMAZ-QKFFDE6\n\tSource Network Address:\t46.235.97.26\n\tSource Port:\t\t0\n\nDetailed Authentication Information:\n\tLogon Process:\t\tUser32 \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "winlog": {
+      "opcode": "Info",
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "channel": "Security",
+      "api": "wineventlog",
+      "record_id": 109161,
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "event_data": {
+        "WorkstationName": "EC2AMAZ-QKFFDE6",
+        "TargetUserName": "Administrator",
+        "ProcessName": "C:\\Windows\\System32\\svchost.exe",
+        "RestrictedAdminMode": "-",
+        "LogonProcessName": "User32 ",
+        "IpAddress": "46.235.97.26",
+        "IpPort": "0",
+        "ProcessId": "0x46c",
+        "VirtualAccount": "%%1843",
+        "SubjectLogonId": "0x3e7",
+        "LmPackageName": "-",
+        "TargetLogonId": "0x6a66ea",
+        "LogonType": "7",
+        "SubjectDomainName": "WORKGROUP",
+        "TransmittedServices": "-",
+        "TargetOutboundDomainName": "-",
+        "TargetDomainName": "EC2AMAZ-QKFFDE6",
+        "TargetOutboundUserName": "-",
+        "AuthenticationPackageName": "Negotiate",
+        "TargetLinkedLogonId": "0x0",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "ElevatedToken": "%%1842",
+        "TargetUserSid": "S-1-5-21-1045577849-1934089403-1939631254-500",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "SubjectUserSid": "S-1-5-18",
+        "KeyLength": "0",
+        "ImpersonationLevel": "%%1833"
+      },
+      "event_id": 4624,
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 4144
+        }
+      },
+      "version": 2,
+      "keywords": [
+        "Audit Success"
+      ],
+      "task": "Logon",
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "provider_name": "Microsoft-Windows-Security-Auditing"
+    },
+    "ecs": {
+      "version": "1.8.0"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T20:29:22.491Z",
+    "winlog": {
+      "channel": "Security",
+      "opcode": "Info",
+      "api": "wineventlog",
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "task": "Logon",
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 2532
+        }
+      },
+      "event_data": {
+        "LogonProcessName": "NtLmSsp ",
+        "SubjectUserSid": "S-1-0-0",
+        "TargetUserSid": "S-1-5-21-1045577849-1934089403-1939631254-500",
+        "TargetOutboundUserName": "-",
+        "TransmittedServices": "-",
+        "ProcessName": "-",
+        "AuthenticationPackageName": "NTLM",
+        "RestrictedAdminMode": "-",
+        "TargetDomainName": "EC2AMAZ-QKFFDE6",
+        "SubjectUserName": "-",
+        "ProcessId": "0x0",
+        "LogonType": "3",
+        "VirtualAccount": "%%1843",
+        "TargetLinkedLogonId": "0x0",
+        "IpPort": "0",
+        "LmPackageName": "NTLM V2",
+        "ImpersonationLevel": "%%1833",
+        "KeyLength": "128",
+        "SubjectLogonId": "0x0",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "IpAddress": "46.235.97.26",
+        "TargetOutboundDomainName": "-",
+        "WorkstationName": "HP-ProBook-470-G2",
+        "TargetLogonId": "0x69d171",
+        "ElevatedToken": "%%1842",
+        "TargetUserName": "Administrator",
+        "SubjectDomainName": "-"
+      },
+      "event_id": 4624,
+      "version": 2,
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "keywords": [
+        "Audit Success"
+      ],
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "record_id": 109157
+    },
+    "event": {
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:29:24.168Z",
+      "outcome": "success",
+      "kind": "event"
+    },
+    "host": {
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "os": {
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "name": "EC2AMAZ-QKFFDE6",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ]
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-0-0\n\tAccount Name:\t\t-\n\tAccount Domain:\t\t-\n\tLogon ID:\t\t0x0\n\nLogon Information:\n\tLogon Type:\t\t3\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-21-1045577849-1934089403-1939631254-500\n\tAccount Name:\t\tAdministrator\n\tAccount Domain:\t\tEC2AMAZ-QKFFDE6\n\tLogon ID:\t\t0x69D171\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x0\n\tProcess Name:\t\t-\n\nNetwork Information:\n\tWorkstation Name:\tHP-ProBook-470-G2\n\tSource Network Address:\t46.235.97.26\n\tSource Port:\t\t0\n\nDetailed Authentication Information:\n\tLogon Process:\t\tNtLmSsp \n\tAuthentication Package:\tNTLM\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\tNTLM V2\n\tKey Length:\t\t128\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "agent": {
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1"
+    },
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "cloud": {
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      }
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T18:47:38.105Z",
+    "cloud": {
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      }
+    },
+    "winlog": {
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "api": "wineventlog",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "keywords": [
+        "Audit Success"
+      ],
+      "event_id": 4624,
+      "process": {
+        "thread": {
+          "id": 192
+        },
+        "pid": 804
+      },
+      "event_data": {
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "ElevatedToken": "%%1842",
+        "TransmittedServices": "-",
+        "ProcessId": "0x318",
+        "TargetLinkedLogonId": "0x0",
+        "LogonProcessName": "Advapi  ",
+        "IpPort": "-",
+        "TargetOutboundDomainName": "-",
+        "SubjectUserSid": "S-1-5-18",
+        "TargetLogonId": "0x3e7",
+        "TargetUserSid": "S-1-5-18",
+        "IpAddress": "-",
+        "TargetOutboundUserName": "-",
+        "TargetDomainName": "NT AUTHORITY",
+        "WorkstationName": "-",
+        "LogonType": "5",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "KeyLength": "0",
+        "LmPackageName": "-",
+        "TargetUserName": "SYSTEM",
+        "SubjectDomainName": "WORKGROUP",
+        "SubjectLogonId": "0x3e7",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "ImpersonationLevel": "%%1833",
+        "RestrictedAdminMode": "-",
+        "AuthenticationPackageName": "Negotiate",
+        "VirtualAccount": "%%1843"
+      },
+      "channel": "Security",
+      "record_id": 109135,
+      "task": "Logon",
+      "opcode": "Info",
+      "version": 2
+    },
+    "event": {
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.273Z",
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing"
+    },
+    "host": {
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "name": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "os": {
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ]
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T18:45:50.799Z",
+    "event": {
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.273Z",
+      "outcome": "success",
+      "kind": "event"
+    },
+    "host": {
+      "name": "EC2AMAZ-QKFFDE6",
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "os": {
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ]
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1"
+    },
+    "cloud": {
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      }
+    },
+    "winlog": {
+      "channel": "Security",
+      "api": "wineventlog",
+      "event_id": 4624,
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 2532
+        }
+      },
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "keywords": [
+        "Audit Success"
+      ],
+      "opcode": "Info",
+      "version": 2,
+      "record_id": 109122,
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "task": "Logon",
+      "event_data": {
+        "IpAddress": "-",
+        "TransmittedServices": "-",
+        "LogonType": "5",
+        "IpPort": "-",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "RestrictedAdminMode": "-",
+        "WorkstationName": "-",
+        "SubjectDomainName": "WORKGROUP",
+        "TargetUserSid": "S-1-5-18",
+        "TargetDomainName": "NT AUTHORITY",
+        "ImpersonationLevel": "%%1833",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "VirtualAccount": "%%1843",
+        "LmPackageName": "-",
+        "TargetLinkedLogonId": "0x0",
+        "TargetLogonId": "0x3e7",
+        "TargetUserName": "SYSTEM",
+        "ElevatedToken": "%%1842",
+        "LogonProcessName": "Advapi  ",
+        "KeyLength": "0",
+        "TargetOutboundDomainName": "-",
+        "SubjectUserSid": "S-1-5-18",
+        "SubjectLogonId": "0x3e7",
+        "ProcessId": "0x318",
+        "TargetOutboundUserName": "-",
+        "AuthenticationPackageName": "Negotiate"
+      }
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T18:19:44.636Z",
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-0-0\n\tAccount Name:\t\t-\n\tAccount Domain:\t\t-\n\tLogon ID:\t\t0x0\n\nLogon Information:\n\tLogon Type:\t\t3\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-21-1045577849-1934089403-1939631254-500\n\tAccount Name:\t\tAdministrator\n\tAccount Domain:\t\tEC2AMAZ-QKFFDE6\n\tLogon ID:\t\t0x4A566E\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x0\n\tProcess Name:\t\t-\n\nNetwork Information:\n\tWorkstation Name:\tHP-ProBook-470-G2\n\tSource Network Address:\t46.235.97.26\n\tSource Port:\t\t0\n\nDetailed Authentication Information:\n\tLogon Process:\t\tNtLmSsp \n\tAuthentication Package:\tNTLM\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\tNTLM V2\n\tKey Length:\t\t128\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "winlog": {
+      "event_id": 4624,
+      "keywords": [
+        "Audit Success"
+      ],
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "event_data": {
+        "TargetDomainName": "EC2AMAZ-QKFFDE6",
+        "ProcessName": "-",
+        "ImpersonationLevel": "%%1833",
+        "LogonProcessName": "NtLmSsp ",
+        "AuthenticationPackageName": "NTLM",
+        "TargetLogonId": "0x4a566e",
+        "TransmittedServices": "-",
+        "RestrictedAdminMode": "-",
+        "IpPort": "0",
+        "VirtualAccount": "%%1843",
+        "KeyLength": "128",
+        "IpAddress": "46.235.97.26",
+        "SubjectDomainName": "-",
+        "TargetLinkedLogonId": "0x0",
+        "TargetUserName": "Administrator",
+        "SubjectLogonId": "0x0",
+        "ElevatedToken": "%%1842",
+        "WorkstationName": "HP-ProBook-470-G2",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "LmPackageName": "NTLM V2",
+        "ProcessId": "0x0",
+        "TargetOutboundUserName": "-",
+        "LogonType": "3",
+        "TargetUserSid": "S-1-5-21-1045577849-1934089403-1939631254-500",
+        "SubjectUserName": "-",
+        "TargetOutboundDomainName": "-",
+        "SubjectUserSid": "S-1-0-0"
+      },
+      "channel": "Security",
+      "task": "Logon",
+      "version": 2,
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "opcode": "Info",
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 2752
+        }
+      },
+      "record_id": 109121,
+      "api": "wineventlog"
+    },
+    "event": {
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.272Z",
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing"
+    },
+    "host": {
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "name": "EC2AMAZ-QKFFDE6",
+      "os": {
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366"
+      }
+    },
+    "agent": {
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat"
+    },
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "cloud": {
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      }
+    },
+    "log": {
+      "level": "information"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T18:16:50.992Z",
+    "agent": {
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6"
+    },
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "cloud": {
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      }
+    },
+    "event": {
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.272Z",
+      "outcome": "success"
+    },
+    "host": {
+      "name": "EC2AMAZ-QKFFDE6",
+      "os": {
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64"
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-0-0\n\tAccount Name:\t\t-\n\tAccount Domain:\t\t-\n\tLogon ID:\t\t0x0\n\nLogon Information:\n\tLogon Type:\t\t3\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-21-1045577849-1934089403-1939631254-500\n\tAccount Name:\t\tAdministrator\n\tAccount Domain:\t\tEC2AMAZ-QKFFDE6\n\tLogon ID:\t\t0x4991FD\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x0\n\tProcess Name:\t\t-\n\nNetwork Information:\n\tWorkstation Name:\tHP-ProBook-470-G2\n\tSource Network Address:\t46.235.97.26\n\tSource Port:\t\t0\n\nDetailed Authentication Information:\n\tLogon Process:\t\tNtLmSsp \n\tAuthentication Package:\tNTLM\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\tNTLM V2\n\tKey Length:\t\t128\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "winlog": {
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "task": "Logon",
+      "record_id": 109117,
+      "opcode": "Info",
+      "event_id": 4624,
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 2532
+        }
+      },
+      "channel": "Security",
+      "api": "wineventlog",
+      "keywords": [
+        "Audit Success"
+      ],
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "event_data": {
+        "IpPort": "0",
+        "LogonProcessName": "NtLmSsp ",
+        "TargetUserSid": "S-1-5-21-1045577849-1934089403-1939631254-500",
+        "WorkstationName": "HP-ProBook-470-G2",
+        "TargetLinkedLogonId": "0x0",
+        "TargetDomainName": "EC2AMAZ-QKFFDE6",
+        "RestrictedAdminMode": "-",
+        "SubjectUserName": "-",
+        "IpAddress": "46.235.97.26",
+        "ProcessName": "-",
+        "TargetUserName": "Administrator",
+        "SubjectLogonId": "0x0",
+        "AuthenticationPackageName": "NTLM",
+        "TransmittedServices": "-",
+        "LogonType": "3",
+        "ElevatedToken": "%%1842",
+        "LmPackageName": "NTLM V2",
+        "ImpersonationLevel": "%%1833",
+        "VirtualAccount": "%%1843",
+        "KeyLength": "128",
+        "ProcessId": "0x0",
+        "TargetLogonId": "0x4991fd",
+        "SubjectDomainName": "-",
+        "TargetOutboundUserName": "-",
+        "TargetOutboundDomainName": "-",
+        "SubjectUserSid": "S-1-0-0",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}"
+      },
+      "version": 2
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T17:50:41.279Z",
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6"
+    },
+    "cloud": {
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      }
+    },
+    "winlog": {
+      "api": "wineventlog",
+      "keywords": [
+        "Audit Success"
+      ],
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "record_id": 109112,
+      "event_id": 4624,
+      "event_data": {
+        "IpPort": "-",
+        "ElevatedToken": "%%1842",
+        "WorkstationName": "-",
+        "ImpersonationLevel": "%%1833",
+        "SubjectDomainName": "WORKGROUP",
+        "TargetLinkedLogonId": "0x0",
+        "LogonProcessName": "Advapi  ",
+        "TransmittedServices": "-",
+        "TargetDomainName": "NT AUTHORITY",
+        "VirtualAccount": "%%1843",
+        "SubjectLogonId": "0x3e7",
+        "RestrictedAdminMode": "-",
+        "AuthenticationPackageName": "Negotiate",
+        "IpAddress": "-",
+        "ProcessId": "0x318",
+        "SubjectUserSid": "S-1-5-18",
+        "TargetUserName": "SYSTEM",
+        "TargetOutboundDomainName": "-",
+        "TargetUserSid": "S-1-5-18",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "LmPackageName": "-",
+        "TargetOutboundUserName": "-",
+        "TargetLogonId": "0x3e7",
+        "KeyLength": "0",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "LogonType": "5",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$"
+      },
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "opcode": "Info",
+      "version": 2,
+      "task": "Logon",
+      "process": {
+        "thread": {
+          "id": 2532
+        },
+        "pid": 804
+      },
+      "channel": "Security"
+    },
+    "event": {
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.272Z",
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624
+    },
+    "host": {
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "name": "EC2AMAZ-QKFFDE6",
+      "os": {
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366"
+      }
+    },
+    "log": {
+      "level": "information"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T17:49:34.791Z",
+    "cloud": {
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      }
+    },
+    "host": {
+      "architecture": "x86_64",
+      "os": {
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "name": "EC2AMAZ-QKFFDE6"
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "winlog": {
+      "record_id": 109110,
+      "version": 2,
+      "channel": "Security",
+      "event_id": 4624,
+      "api": "wineventlog",
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "keywords": [
+        "Audit Success"
+      ],
+      "task": "Logon",
+      "opcode": "Info",
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "event_data": {
+        "IpAddress": "-",
+        "WorkstationName": "-",
+        "TargetUserName": "SYSTEM",
+        "IpPort": "-",
+        "VirtualAccount": "%%1843",
+        "SubjectUserSid": "S-1-5-18",
+        "LmPackageName": "-",
+        "LogonProcessName": "Advapi  ",
+        "TransmittedServices": "-",
+        "TargetLinkedLogonId": "0x0",
+        "TargetUserSid": "S-1-5-18",
+        "TargetDomainName": "NT AUTHORITY",
+        "KeyLength": "0",
+        "TargetLogonId": "0x3e7",
+        "TargetOutboundDomainName": "-",
+        "SubjectDomainName": "WORKGROUP",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "AuthenticationPackageName": "Negotiate",
+        "ProcessId": "0x318",
+        "RestrictedAdminMode": "-",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "ImpersonationLevel": "%%1833",
+        "TargetOutboundUserName": "-",
+        "SubjectLogonId": "0x3e7",
+        "LogonType": "5",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "ElevatedToken": "%%1842"
+      },
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 2532
+        }
+      },
+      "computer_name": "EC2AMAZ-QKFFDE6"
+    },
+    "event": {
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.272Z",
+      "outcome": "success"
+    },
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T17:49:16.075Z",
+    "host": {
+      "architecture": "x86_64",
+      "os": {
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "name": "EC2AMAZ-QKFFDE6",
+      "hostname": "EC2AMAZ-QKFFDE6"
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "winlog": {
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "version": 2,
+      "event_id": 4624,
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "api": "wineventlog",
+      "opcode": "Info",
+      "process": {
+        "thread": {
+          "id": 2532
+        },
+        "pid": 804
+      },
+      "event_data": {
+        "TargetUserSid": "S-1-5-18",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "SubjectUserSid": "S-1-5-18",
+        "LogonType": "5",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "KeyLength": "0",
+        "VirtualAccount": "%%1843",
+        "ElevatedToken": "%%1842",
+        "WorkstationName": "-",
+        "IpPort": "-",
+        "TargetLogonId": "0x3e7",
+        "ProcessId": "0x318",
+        "TargetDomainName": "NT AUTHORITY",
+        "IpAddress": "-",
+        "TargetUserName": "SYSTEM",
+        "SubjectLogonId": "0x3e7",
+        "TargetLinkedLogonId": "0x0",
+        "SubjectDomainName": "WORKGROUP",
+        "RestrictedAdminMode": "-",
+        "TargetOutboundDomainName": "-",
+        "TargetOutboundUserName": "-",
+        "LogonProcessName": "Advapi  ",
+        "ImpersonationLevel": "%%1833",
+        "AuthenticationPackageName": "Negotiate",
+        "TransmittedServices": "-",
+        "LmPackageName": "-",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$"
+      },
+      "channel": "Security",
+      "task": "Logon",
+      "keywords": [
+        "Audit Success"
+      ],
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "record_id": 109095
+    },
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1"
+    },
+    "cloud": {
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      }
+    },
+    "event": {
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.271Z",
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T17:34:24.392Z",
+    "cloud": {
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d"
+    },
+    "winlog": {
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "record_id": 109072,
+      "task": "Logon",
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "opcode": "Info",
+      "api": "wineventlog",
+      "keywords": [
+        "Audit Success"
+      ],
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 2532
+        }
+      },
+      "event_id": 4624,
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "event_data": {
+        "ImpersonationLevel": "%%1833",
+        "TargetOutboundUserName": "-",
+        "TransmittedServices": "-",
+        "LogonType": "5",
+        "TargetOutboundDomainName": "-",
+        "TargetUserSid": "S-1-5-18",
+        "AuthenticationPackageName": "Negotiate",
+        "SubjectUserSid": "S-1-5-18",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "SubjectLogonId": "0x3e7",
+        "WorkstationName": "-",
+        "TargetLogonId": "0x3e7",
+        "TargetDomainName": "NT AUTHORITY",
+        "IpPort": "-",
+        "ProcessId": "0x318",
+        "LogonProcessName": "Advapi  ",
+        "VirtualAccount": "%%1843",
+        "LmPackageName": "-",
+        "ElevatedToken": "%%1842",
+        "TargetLinkedLogonId": "0x0",
+        "SubjectDomainName": "WORKGROUP",
+        "TargetUserName": "SYSTEM",
+        "KeyLength": "0",
+        "RestrictedAdminMode": "-",
+        "IpAddress": "-",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}"
+      },
+      "channel": "Security",
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "version": 2
+    },
+    "event": {
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.140Z",
+      "outcome": "success",
+      "kind": "event"
+    },
+    "host": {
+      "name": "EC2AMAZ-QKFFDE6",
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "os": {
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ]
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T17:34:20.985Z",
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1"
+    },
+    "cloud": {
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      }
+    },
+    "winlog": {
+      "task": "Logon",
+      "api": "wineventlog",
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "opcode": "Info",
+      "event_id": 4624,
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "event_data": {
+        "TargetOutboundUserName": "-",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "ImpersonationLevel": "%%1833",
+        "ProcessId": "0x318",
+        "RestrictedAdminMode": "-",
+        "ElevatedToken": "%%1842",
+        "TargetUserSid": "S-1-5-18",
+        "TargetDomainName": "NT AUTHORITY",
+        "TargetUserName": "SYSTEM",
+        "LmPackageName": "-",
+        "SubjectDomainName": "WORKGROUP",
+        "AuthenticationPackageName": "Negotiate",
+        "WorkstationName": "-",
+        "KeyLength": "0",
+        "TargetOutboundDomainName": "-",
+        "LogonProcessName": "Advapi  ",
+        "TargetLinkedLogonId": "0x0",
+        "LogonType": "5",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "SubjectUserSid": "S-1-5-18",
+        "VirtualAccount": "%%1843",
+        "SubjectLogonId": "0x3e7",
+        "IpPort": "-",
+        "TargetLogonId": "0x3e7",
+        "TransmittedServices": "-",
+        "IpAddress": "-",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$"
+      },
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "channel": "Security",
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 2752
+        }
+      },
+      "version": 2,
+      "keywords": [
+        "Audit Success"
+      ],
+      "record_id": 109070
+    },
+    "event": {
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.140Z",
+      "outcome": "success"
+    },
+    "host": {
+      "name": "EC2AMAZ-QKFFDE6",
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "os": {
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ]
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T17:34:16.478Z",
+    "cloud": {
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws"
+    },
+    "host": {
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "name": "EC2AMAZ-QKFFDE6",
+      "os": {
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ]
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "winlog": {
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 2752
+        }
+      },
+      "event_id": 4624,
+      "event_data": {
+        "SubjectDomainName": "WORKGROUP",
+        "TargetUserName": "SYSTEM",
+        "ImpersonationLevel": "%%1833",
+        "VirtualAccount": "%%1843",
+        "TargetUserSid": "S-1-5-18",
+        "LogonType": "5",
+        "TargetLogonId": "0x3e7",
+        "LogonProcessName": "Advapi  ",
+        "TargetDomainName": "NT AUTHORITY",
+        "ElevatedToken": "%%1842",
+        "TargetOutboundDomainName": "-",
+        "TargetLinkedLogonId": "0x0",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "KeyLength": "0",
+        "AuthenticationPackageName": "Negotiate",
+        "IpPort": "-",
+        "WorkstationName": "-",
+        "TransmittedServices": "-",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "ProcessId": "0x318",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "SubjectUserSid": "S-1-5-18",
+        "LmPackageName": "-",
+        "IpAddress": "-",
+        "RestrictedAdminMode": "-",
+        "TargetOutboundUserName": "-",
+        "SubjectLogonId": "0x3e7"
+      },
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "task": "Logon",
+      "keywords": [
+        "Audit Success"
+      ],
+      "api": "wineventlog",
+      "opcode": "Info",
+      "channel": "Security",
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "version": 2,
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "record_id": 109058
+    },
+    "event": {
+      "created": "2022-12-27T20:24:58.140Z",
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon"
+    },
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T17:34:13.900Z",
+    "event": {
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.140Z",
+      "outcome": "success"
+    },
+    "host": {
+      "name": "EC2AMAZ-QKFFDE6",
+      "os": {
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64"
+    },
+    "log": {
+      "level": "information"
+    },
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8"
+    },
+    "cloud": {
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      }
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "winlog": {
+      "version": 2,
+      "event_data": {
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "LmPackageName": "-",
+        "TargetDomainName": "NT AUTHORITY",
+        "TargetOutboundUserName": "-",
+        "WorkstationName": "-",
+        "LogonType": "5",
+        "AuthenticationPackageName": "Negotiate",
+        "VirtualAccount": "%%1843",
+        "LogonProcessName": "Advapi  ",
+        "IpPort": "-",
+        "TargetLinkedLogonId": "0x0",
+        "ElevatedToken": "%%1842",
+        "ProcessId": "0x318",
+        "TransmittedServices": "-",
+        "TargetOutboundDomainName": "-",
+        "SubjectDomainName": "WORKGROUP",
+        "TargetUserSid": "S-1-5-18",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "KeyLength": "0",
+        "TargetUserName": "SYSTEM",
+        "ImpersonationLevel": "%%1833",
+        "RestrictedAdminMode": "-",
+        "SubjectUserSid": "S-1-5-18",
+        "TargetLogonId": "0x3e7",
+        "SubjectLogonId": "0x3e7",
+        "IpAddress": "-"
+      },
+      "channel": "Security",
+      "api": "wineventlog",
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 3764
+        }
+      },
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "task": "Logon",
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "event_id": 4624,
+      "opcode": "Info",
+      "keywords": [
+        "Audit Success"
+      ],
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "record_id": 109056
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T17:34:12.978Z",
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8"
+    },
+    "cloud": {
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      }
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t10\n\tRestricted Admin Mode:\tNo\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-21-1045577849-1934089403-1939631254-500\n\tAccount Name:\t\tAdministrator\n\tAccount Domain:\t\tEC2AMAZ-QKFFDE6\n\tLogon ID:\t\t0x35CE6E\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x46c\n\tProcess Name:\t\tC:\\Windows\\System32\\svchost.exe\n\nNetwork Information:\n\tWorkstation Name:\tEC2AMAZ-QKFFDE6\n\tSource Network Address:\t46.235.97.26\n\tSource Port:\t\t0\n\nDetailed Authentication Information:\n\tLogon Process:\t\tUser32 \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "winlog": {
+      "event_id": 4624,
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 3764
+        }
+      },
+      "record_id": 109053,
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "opcode": "Info",
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "keywords": [
+        "Audit Success"
+      ],
+      "event_data": {
+        "TransmittedServices": "-",
+        "ProcessName": "C:\\Windows\\System32\\svchost.exe",
+        "TargetDomainName": "EC2AMAZ-QKFFDE6",
+        "WorkstationName": "EC2AMAZ-QKFFDE6",
+        "LmPackageName": "-",
+        "KeyLength": "0",
+        "VirtualAccount": "%%1843",
+        "ProcessId": "0x46c",
+        "SubjectUserSid": "S-1-5-18",
+        "LogonType": "10",
+        "LogonProcessName": "User32 ",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "SubjectDomainName": "WORKGROUP",
+        "TargetLinkedLogonId": "0x0",
+        "ImpersonationLevel": "%%1833",
+        "ElevatedToken": "%%1842",
+        "IpAddress": "46.235.97.26",
+        "TargetOutboundUserName": "-",
+        "TargetOutboundDomainName": "-",
+        "TargetLogonId": "0x35ce6e",
+        "IpPort": "0",
+        "SubjectLogonId": "0x3e7",
+        "AuthenticationPackageName": "Negotiate",
+        "TargetUserSid": "S-1-5-21-1045577849-1934089403-1939631254-500",
+        "TargetUserName": "Administrator",
+        "RestrictedAdminMode": "%%1843"
+      },
+      "version": 2,
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "channel": "Security",
+      "task": "Logon",
+      "api": "wineventlog",
+      "computer_name": "EC2AMAZ-QKFFDE6"
+    },
+    "event": {
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.140Z"
+    },
+    "host": {
+      "os": {
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "name": "EC2AMAZ-QKFFDE6"
+    },
+    "log": {
+      "level": "information"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T17:34:10.070Z",
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t2\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tYes\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-90-0-2\n\tAccount Name:\t\tDWM-2\n\tAccount Domain:\t\tWindow Manager\n\tLogon ID:\t\t0x35251A\n\tLinked Logon ID:\t\t0x35267B\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x420\n\tProcess Name:\t\tC:\\Windows\\System32\\winlogon.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "agent": {
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6"
+    },
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "cloud": {
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      }
+    },
+    "winlog": {
+      "record_id": 109046,
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "keywords": [
+        "Audit Success"
+      ],
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "event_data": {
+        "ElevatedToken": "%%1842",
+        "ProcessName": "C:\\Windows\\System32\\winlogon.exe",
+        "LogonProcessName": "Advapi  ",
+        "LmPackageName": "-",
+        "TargetLogonId": "0x35251a",
+        "TargetUserName": "DWM-2",
+        "TargetLinkedLogonId": "0x35267b",
+        "TargetOutboundUserName": "-",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "TargetDomainName": "Window Manager",
+        "ProcessId": "0x420",
+        "IpPort": "-",
+        "RestrictedAdminMode": "-",
+        "WorkstationName": "-",
+        "AuthenticationPackageName": "Negotiate",
+        "IpAddress": "-",
+        "LogonType": "2",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "TargetOutboundDomainName": "-",
+        "SubjectLogonId": "0x3e7",
+        "ImpersonationLevel": "%%1833",
+        "TargetUserSid": "S-1-5-90-0-2",
+        "SubjectUserSid": "S-1-5-18",
+        "TransmittedServices": "-",
+        "KeyLength": "0",
+        "SubjectDomainName": "WORKGROUP",
+        "VirtualAccount": "%%1842"
+      },
+      "event_id": 4624,
+      "api": "wineventlog",
+      "task": "Logon",
+      "opcode": "Info",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 3592
+        }
+      },
+      "version": 2,
+      "channel": "Security"
+    },
+    "event": {
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.139Z",
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing"
+    },
+    "host": {
+      "os": {
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "name": "EC2AMAZ-QKFFDE6",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64"
+    },
+    "log": {
+      "level": "information"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T17:34:10.070Z",
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "cloud": {
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t2\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tYes\n\tElevated Token:\t\tNo\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-90-0-2\n\tAccount Name:\t\tDWM-2\n\tAccount Domain:\t\tWindow Manager\n\tLogon ID:\t\t0x35267B\n\tLinked Logon ID:\t\t0x35251A\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x420\n\tProcess Name:\t\tC:\\Windows\\System32\\winlogon.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "winlog": {
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 3592
+        }
+      },
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "keywords": [
+        "Audit Success"
+      ],
+      "record_id": 109047,
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "version": 2,
+      "event_data": {
+        "TargetLogonId": "0x35267b",
+        "TargetUserName": "DWM-2",
+        "LmPackageName": "-",
+        "ElevatedToken": "%%1843",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "KeyLength": "0",
+        "IpPort": "-",
+        "SubjectLogonId": "0x3e7",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "WorkstationName": "-",
+        "IpAddress": "-",
+        "LogonType": "2",
+        "RestrictedAdminMode": "-",
+        "ProcessId": "0x420",
+        "ImpersonationLevel": "%%1833",
+        "TargetOutboundDomainName": "-",
+        "TransmittedServices": "-",
+        "TargetLinkedLogonId": "0x35251a",
+        "SubjectDomainName": "WORKGROUP",
+        "ProcessName": "C:\\Windows\\System32\\winlogon.exe",
+        "SubjectUserSid": "S-1-5-18",
+        "VirtualAccount": "%%1842",
+        "TargetUserSid": "S-1-5-90-0-2",
+        "LogonProcessName": "Advapi  ",
+        "TargetOutboundUserName": "-",
+        "TargetDomainName": "Window Manager",
+        "AuthenticationPackageName": "Negotiate"
+      },
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "opcode": "Info",
+      "event_id": 4624,
+      "api": "wineventlog",
+      "task": "Logon",
+      "channel": "Security"
+    },
+    "event": {
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.140Z",
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624
+    },
+    "host": {
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "name": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "os": {
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12"
+    },
+    "log": {
+      "level": "information"
+    },
+    "agent": {
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T17:34:09.856Z",
+    "host": {
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "os": {
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "name": "EC2AMAZ-QKFFDE6"
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t2\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tYes\n\tElevated Token:\t\tNo\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-96-0-2\n\tAccount Name:\t\tUMFD-2\n\tAccount Domain:\t\tFont Driver Host\n\tLogon ID:\t\t0x351C84\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x420\n\tProcess Name:\t\tC:\\Windows\\System32\\winlogon.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6"
+    },
+    "cloud": {
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      }
+    },
+    "winlog": {
+      "event_id": 4624,
+      "api": "wineventlog",
+      "channel": "Security",
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 3592
+        }
+      },
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "keywords": [
+        "Audit Success"
+      ],
+      "version": 2,
+      "task": "Logon",
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "record_id": 109044,
+      "opcode": "Info",
+      "event_data": {
+        "WorkstationName": "-",
+        "TargetOutboundUserName": "-",
+        "LogonProcessName": "Advapi  ",
+        "TargetLogonId": "0x351c84",
+        "VirtualAccount": "%%1842",
+        "SubjectDomainName": "WORKGROUP",
+        "TargetUserSid": "S-1-5-96-0-2",
+        "ProcessId": "0x420",
+        "IpPort": "-",
+        "AuthenticationPackageName": "Negotiate",
+        "ElevatedToken": "%%1843",
+        "SubjectLogonId": "0x3e7",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "TargetLinkedLogonId": "0x0",
+        "TargetOutboundDomainName": "-",
+        "TargetDomainName": "Font Driver Host",
+        "ImpersonationLevel": "%%1833",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "ProcessName": "C:\\Windows\\System32\\winlogon.exe",
+        "RestrictedAdminMode": "-",
+        "TargetUserName": "UMFD-2",
+        "LmPackageName": "-",
+        "LogonType": "2",
+        "KeyLength": "0",
+        "SubjectUserSid": "S-1-5-18",
+        "IpAddress": "-",
+        "TransmittedServices": "-"
+      }
+    },
+    "event": {
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.139Z"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T17:34:05.225Z",
+    "cloud": {
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      }
+    },
+    "host": {
+      "architecture": "x86_64",
+      "os": {
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "name": "EC2AMAZ-QKFFDE6",
+      "hostname": "EC2AMAZ-QKFFDE6"
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-0-0\n\tAccount Name:\t\t-\n\tAccount Domain:\t\t-\n\tLogon ID:\t\t0x0\n\nLogon Information:\n\tLogon Type:\t\t3\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-21-1045577849-1934089403-1939631254-500\n\tAccount Name:\t\tAdministrator\n\tAccount Domain:\t\tEC2AMAZ-QKFFDE6\n\tLogon ID:\t\t0x34EC64\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x0\n\tProcess Name:\t\t-\n\nNetwork Information:\n\tWorkstation Name:\tHP-ProBook-470-G2\n\tSource Network Address:\t46.235.97.26\n\tSource Port:\t\t0\n\nDetailed Authentication Information:\n\tLogon Process:\t\tNtLmSsp \n\tAuthentication Package:\tNTLM\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\tNTLM V2\n\tKey Length:\t\t128\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "winlog": {
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "task": "Logon",
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "opcode": "Info",
+      "record_id": 109042,
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 3592
+        }
+      },
+      "api": "wineventlog",
+      "event_id": 4624,
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "event_data": {
+        "LogonProcessName": "NtLmSsp ",
+        "KeyLength": "128",
+        "TargetUserName": "Administrator",
+        "TransmittedServices": "-",
+        "SubjectUserSid": "S-1-0-0",
+        "IpAddress": "46.235.97.26",
+        "ImpersonationLevel": "%%1833",
+        "AuthenticationPackageName": "NTLM",
+        "IpPort": "0",
+        "TargetUserSid": "S-1-5-21-1045577849-1934089403-1939631254-500",
+        "LogonType": "3",
+        "TargetLogonId": "0x34ec64",
+        "LmPackageName": "NTLM V2",
+        "ProcessId": "0x0",
+        "SubjectDomainName": "-",
+        "SubjectLogonId": "0x0",
+        "TargetOutboundDomainName": "-",
+        "ProcessName": "-",
+        "SubjectUserName": "-",
+        "TargetOutboundUserName": "-",
+        "TargetDomainName": "EC2AMAZ-QKFFDE6",
+        "WorkstationName": "HP-ProBook-470-G2",
+        "TargetLinkedLogonId": "0x0",
+        "ElevatedToken": "%%1842",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "VirtualAccount": "%%1843",
+        "RestrictedAdminMode": "-"
+      },
+      "channel": "Security",
+      "keywords": [
+        "Audit Success"
+      ],
+      "version": 2
+    },
+    "event": {
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.139Z",
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624
+    },
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T16:41:49.465Z",
+    "cloud": {
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1"
+    },
+    "winlog": {
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "channel": "Security",
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "event_data": {
+        "RestrictedAdminMode": "-",
+        "SubjectLogonId": "0x3e7",
+        "TargetOutboundUserName": "-",
+        "TargetLinkedLogonId": "0x0",
+        "IpAddress": "-",
+        "LmPackageName": "-",
+        "AuthenticationPackageName": "Negotiate",
+        "LogonProcessName": "Advapi  ",
+        "TargetDomainName": "NT AUTHORITY",
+        "WorkstationName": "-",
+        "TargetUserName": "SYSTEM",
+        "IpPort": "-",
+        "TargetLogonId": "0x3e7",
+        "SubjectDomainName": "WORKGROUP",
+        "ProcessId": "0x318",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "ElevatedToken": "%%1842",
+        "SubjectUserSid": "S-1-5-18",
+        "TransmittedServices": "-",
+        "TargetUserSid": "S-1-5-18",
+        "VirtualAccount": "%%1843",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "LogonType": "5",
+        "KeyLength": "0",
+        "ImpersonationLevel": "%%1833",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "TargetOutboundDomainName": "-"
+      },
+      "record_id": 109035,
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "event_id": 4624,
+      "task": "Logon",
+      "version": 2,
+      "api": "wineventlog",
+      "process": {
+        "thread": {
+          "id": 3800
+        },
+        "pid": 804
+      },
+      "opcode": "Info",
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "keywords": [
+        "Audit Success"
+      ]
+    },
+    "event": {
+      "created": "2022-12-27T20:24:58.139Z",
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon"
+    },
+    "host": {
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "name": "EC2AMAZ-QKFFDE6",
+      "os": {
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ]
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T16:39:42.284Z",
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8"
+    },
+    "cloud": {
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      }
+    },
+    "winlog": {
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "channel": "Security",
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 852
+        }
+      },
+      "event_data": {
+        "SubjectLogonId": "0x3e7",
+        "ImpersonationLevel": "%%1833",
+        "ProcessId": "0x318",
+        "IpPort": "-",
+        "TargetLinkedLogonId": "0x0",
+        "ElevatedToken": "%%1842",
+        "IpAddress": "-",
+        "RestrictedAdminMode": "-",
+        "WorkstationName": "-",
+        "TargetOutboundDomainName": "-",
+        "SubjectDomainName": "WORKGROUP",
+        "SubjectUserSid": "S-1-5-18",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "LogonType": "5",
+        "TargetDomainName": "NT AUTHORITY",
+        "TargetUserName": "SYSTEM",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "TargetLogonId": "0x3e7",
+        "TargetOutboundUserName": "-",
+        "LogonProcessName": "Advapi  ",
+        "KeyLength": "0",
+        "LmPackageName": "-",
+        "AuthenticationPackageName": "Negotiate",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "TargetUserSid": "S-1-5-18",
+        "VirtualAccount": "%%1843",
+        "TransmittedServices": "-"
+      },
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "api": "wineventlog",
+      "record_id": 109033,
+      "opcode": "Info",
+      "event_id": 4624,
+      "keywords": [
+        "Audit Success"
+      ],
+      "version": 2,
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "task": "Logon"
+    },
+    "event": {
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.139Z",
+      "outcome": "success"
+    },
+    "host": {
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "os": {
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366"
+      },
+      "name": "EC2AMAZ-QKFFDE6"
+    },
+    "log": {
+      "level": "information"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T16:39:39.020Z",
+    "agent": {
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1"
+    },
+    "cloud": {
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "winlog": {
+      "opcode": "Info",
+      "process": {
+        "thread": {
+          "id": 852
+        },
+        "pid": 804
+      },
+      "keywords": [
+        "Audit Success"
+      ],
+      "version": 2,
+      "record_id": 109031,
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "channel": "Security",
+      "event_data": {
+        "ProcessId": "0x318",
+        "SubjectLogonId": "0x3e7",
+        "TransmittedServices": "-",
+        "RestrictedAdminMode": "-",
+        "VirtualAccount": "%%1843",
+        "KeyLength": "0",
+        "ImpersonationLevel": "%%1833",
+        "IpPort": "-",
+        "TargetOutboundUserName": "-",
+        "WorkstationName": "-",
+        "IpAddress": "-",
+        "TargetLinkedLogonId": "0x0",
+        "TargetDomainName": "NT AUTHORITY",
+        "TargetLogonId": "0x3e7",
+        "AuthenticationPackageName": "Negotiate",
+        "ElevatedToken": "%%1842",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "LogonType": "5",
+        "LmPackageName": "-",
+        "SubjectDomainName": "WORKGROUP",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "TargetUserName": "SYSTEM",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "SubjectUserSid": "S-1-5-18",
+        "TargetOutboundDomainName": "-",
+        "TargetUserSid": "S-1-5-18",
+        "LogonProcessName": "Advapi  "
+      },
+      "task": "Logon",
+      "api": "wineventlog",
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "event_id": 4624
+    },
+    "event": {
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.139Z",
+      "outcome": "success",
+      "kind": "event"
+    },
+    "host": {
+      "name": "EC2AMAZ-QKFFDE6",
+      "os": {
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64"
+    },
+    "log": {
+      "level": "information"
+    },
+    "ecs": {
+      "version": "1.8.0"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T16:35:58.373Z",
+    "cloud": {
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d"
+    },
+    "winlog": {
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "record_id": 109019,
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "task": "Logon",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "channel": "Security",
+      "process": {
+        "thread": {
+          "id": 3724
+        },
+        "pid": 804
+      },
+      "api": "wineventlog",
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "event_data": {
+        "TargetOutboundUserName": "-",
+        "LogonProcessName": "Advapi  ",
+        "SubjectLogonId": "0x3e7",
+        "WorkstationName": "-",
+        "RestrictedAdminMode": "-",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "TargetLogonId": "0x3e7",
+        "AuthenticationPackageName": "Negotiate",
+        "TargetUserName": "SYSTEM",
+        "ProcessId": "0x318",
+        "VirtualAccount": "%%1843",
+        "KeyLength": "0",
+        "LogonType": "5",
+        "ImpersonationLevel": "%%1833",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "SubjectUserSid": "S-1-5-18",
+        "TargetDomainName": "NT AUTHORITY",
+        "TargetOutboundDomainName": "-",
+        "IpAddress": "-",
+        "ElevatedToken": "%%1842",
+        "TargetUserSid": "S-1-5-18",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "IpPort": "-",
+        "TransmittedServices": "-",
+        "SubjectDomainName": "WORKGROUP",
+        "TargetLinkedLogonId": "0x0",
+        "LmPackageName": "-"
+      },
+      "opcode": "Info",
+      "event_id": 4624,
+      "keywords": [
+        "Audit Success"
+      ],
+      "version": 2
+    },
+    "event": {
+      "action": "Logon",
+      "created": "2022-12-27T20:24:58.139Z",
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing"
+    },
+    "host": {
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "name": "EC2AMAZ-QKFFDE6",
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "os": {
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366",
+        "type": "windows"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12"
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T16:35:23.673Z",
+    "event": {
+      "created": "2022-12-27T20:24:57.867Z",
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon"
+    },
+    "host": {
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "name": "EC2AMAZ-QKFFDE6",
+      "os": {
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ]
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1"
+    },
+    "cloud": {
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      }
+    },
+    "winlog": {
+      "task": "Logon",
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "api": "wineventlog",
+      "channel": "Security",
+      "event_id": 4624,
+      "record_id": 108986,
+      "version": 2,
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 852
+        }
+      },
+      "event_data": {
+        "VirtualAccount": "%%1843",
+        "ProcessId": "0x318",
+        "SubjectDomainName": "WORKGROUP",
+        "TargetOutboundUserName": "-",
+        "RestrictedAdminMode": "-",
+        "TargetUserName": "SYSTEM",
+        "IpPort": "-",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "LogonType": "5",
+        "AuthenticationPackageName": "Negotiate",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "SubjectUserSid": "S-1-5-18",
+        "TargetLogonId": "0x3e7",
+        "TargetUserSid": "S-1-5-18",
+        "TargetDomainName": "NT AUTHORITY",
+        "TargetLinkedLogonId": "0x0",
+        "SubjectLogonId": "0x3e7",
+        "KeyLength": "0",
+        "ElevatedToken": "%%1842",
+        "LogonProcessName": "Advapi  ",
+        "ImpersonationLevel": "%%1833",
+        "TargetOutboundDomainName": "-",
+        "TransmittedServices": "-",
+        "LmPackageName": "-",
+        "WorkstationName": "-",
+        "IpAddress": "-"
+      },
+      "opcode": "Info",
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "keywords": [
+        "Audit Success"
+      ]
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T16:34:00.883Z",
+    "cloud": {
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      }
+    },
+    "event": {
+      "action": "Logon",
+      "created": "2022-12-27T20:24:57.867Z",
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing"
+    },
+    "host": {
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "os": {
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter"
+      },
+      "name": "EC2AMAZ-QKFFDE6",
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ]
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "winlog": {
+      "api": "wineventlog",
+      "event_data": {
+        "IpAddress": "-",
+        "WorkstationName": "-",
+        "SubjectUserSid": "S-1-5-18",
+        "SubjectDomainName": "WORKGROUP",
+        "LogonType": "5",
+        "TargetOutboundDomainName": "-",
+        "LogonProcessName": "Advapi  ",
+        "TransmittedServices": "-",
+        "TargetUserName": "SYSTEM",
+        "TargetLogonId": "0x3e7",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "ImpersonationLevel": "%%1833",
+        "RestrictedAdminMode": "-",
+        "KeyLength": "0",
+        "TargetOutboundUserName": "-",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "SubjectLogonId": "0x3e7",
+        "IpPort": "-",
+        "TargetDomainName": "NT AUTHORITY",
+        "ElevatedToken": "%%1842",
+        "TargetUserSid": "S-1-5-18",
+        "AuthenticationPackageName": "Negotiate",
+        "TargetLinkedLogonId": "0x0",
+        "ProcessId": "0x318",
+        "LmPackageName": "-",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "VirtualAccount": "%%1843"
+      },
+      "opcode": "Info",
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "event_id": 4624,
+      "process": {
+        "thread": {
+          "id": 844
+        },
+        "pid": 804
+      },
+      "task": "Logon",
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "record_id": 108971,
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "channel": "Security",
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "keywords": [
+        "Audit Success"
+      ],
+      "version": 2
+    },
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T16:33:45.972Z",
+    "agent": {
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6"
+    },
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "cloud": {
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d"
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "winlog": {
+      "version": 2,
+      "task": "Logon",
+      "record_id": 108967,
+      "channel": "Security",
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "keywords": [
+        "Audit Success"
+      ],
+      "event_data": {
+        "RestrictedAdminMode": "-",
+        "TargetDomainName": "NT AUTHORITY",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "TargetUserSid": "S-1-5-18",
+        "SubjectDomainName": "WORKGROUP",
+        "ElevatedToken": "%%1842",
+        "ProcessId": "0x318",
+        "TargetUserName": "SYSTEM",
+        "LmPackageName": "-",
+        "WorkstationName": "-",
+        "IpAddress": "-",
+        "ImpersonationLevel": "%%1833",
+        "TargetLogonId": "0x3e7",
+        "KeyLength": "0",
+        "TargetOutboundUserName": "-",
+        "SubjectLogonId": "0x3e7",
+        "VirtualAccount": "%%1843",
+        "LogonProcessName": "Advapi  ",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "AuthenticationPackageName": "Negotiate",
+        "TransmittedServices": "-",
+        "TargetLinkedLogonId": "0x0",
+        "IpPort": "-",
+        "TargetOutboundDomainName": "-",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "LogonType": "5",
+        "SubjectUserSid": "S-1-5-18"
+      },
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 852
+        }
+      },
+      "api": "wineventlog",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "opcode": "Info",
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "event_id": 4624
+    },
+    "event": {
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:57.867Z",
+      "outcome": "success",
+      "kind": "event"
+    },
+    "host": {
+      "name": "EC2AMAZ-QKFFDE6",
+      "os": {
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T16:33:43.566Z",
+    "event": {
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:57.867Z"
+    },
+    "host": {
+      "name": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64",
+      "os": {
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366",
+        "type": "windows"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6"
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6"
+    },
+    "cloud": {
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      }
+    },
+    "winlog": {
+      "record_id": 108962,
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "event_id": 4624,
+      "event_data": {
+        "SubjectUserSid": "S-1-5-18",
+        "ElevatedToken": "%%1842",
+        "TargetLogonId": "0x3e7",
+        "LogonProcessName": "Advapi  ",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "IpAddress": "-",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "LmPackageName": "-",
+        "RestrictedAdminMode": "-",
+        "VirtualAccount": "%%1843",
+        "TargetUserName": "SYSTEM",
+        "AuthenticationPackageName": "Negotiate",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "ImpersonationLevel": "%%1833",
+        "TargetUserSid": "S-1-5-18",
+        "TargetOutboundUserName": "-",
+        "TargetDomainName": "NT AUTHORITY",
+        "TargetOutboundDomainName": "-",
+        "IpPort": "-",
+        "TargetLinkedLogonId": "0x0",
+        "KeyLength": "0",
+        "TransmittedServices": "-",
+        "WorkstationName": "-",
+        "SubjectDomainName": "WORKGROUP",
+        "ProcessId": "0x318",
+        "SubjectLogonId": "0x3e7",
+        "LogonType": "5"
+      },
+      "opcode": "Info",
+      "channel": "Security",
+      "version": 2,
+      "keywords": [
+        "Audit Success"
+      ],
+      "task": "Logon",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 844
+        }
+      },
+      "api": "wineventlog",
+      "computer_name": "EC2AMAZ-QKFFDE6"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T16:33:43.477Z",
+    "cloud": {
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d",
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      }
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "winlog": {
+      "event_id": 4624,
+      "channel": "Security",
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "event_data": {
+        "TargetDomainName": "NT AUTHORITY",
+        "SubjectDomainName": "WORKGROUP",
+        "LogonType": "5",
+        "TargetUserName": "SYSTEM",
+        "ProcessId": "0x318",
+        "VirtualAccount": "%%1843",
+        "WorkstationName": "-",
+        "TargetUserSid": "S-1-5-18",
+        "SubjectLogonId": "0x3e7",
+        "ImpersonationLevel": "%%1833",
+        "KeyLength": "0",
+        "IpPort": "-",
+        "AuthenticationPackageName": "Negotiate",
+        "TransmittedServices": "-",
+        "RestrictedAdminMode": "-",
+        "ElevatedToken": "%%1842",
+        "TargetOutboundUserName": "-",
+        "LmPackageName": "-",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "SubjectUserSid": "S-1-5-18",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "TargetLinkedLogonId": "0x0",
+        "LogonProcessName": "Advapi  ",
+        "TargetLogonId": "0x3e7",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "IpAddress": "-",
+        "TargetOutboundDomainName": "-"
+      },
+      "task": "Logon",
+      "record_id": 108960,
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "opcode": "Info",
+      "api": "wineventlog",
+      "keywords": [
+        "Audit Success"
+      ],
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 844
+        }
+      },
+      "version": 2
+    },
+    "event": {
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:57.867Z"
+    },
+    "host": {
+      "architecture": "x86_64",
+      "os": {
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "name": "EC2AMAZ-QKFFDE6",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6"
+    },
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T16:33:43.448Z",
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat"
+    },
+    "cloud": {
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d"
+    },
+    "log": {
+      "level": "information"
+    },
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "winlog": {
+      "process": {
+        "pid": 804,
+        "thread": {
+          "id": 844
+        }
+      },
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "event_data": {
+        "IpAddress": "-",
+        "LogonType": "5",
+        "AuthenticationPackageName": "Negotiate",
+        "ImpersonationLevel": "%%1833",
+        "LogonProcessName": "Advapi  ",
+        "IpPort": "-",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "WorkstationName": "-",
+        "TargetUserName": "SYSTEM",
+        "TargetLogonId": "0x3e7",
+        "LmPackageName": "-",
+        "VirtualAccount": "%%1843",
+        "SubjectDomainName": "WORKGROUP",
+        "ProcessId": "0x318",
+        "TargetOutboundUserName": "-",
+        "TargetUserSid": "S-1-5-18",
+        "RestrictedAdminMode": "-",
+        "TargetDomainName": "NT AUTHORITY",
+        "SubjectUserSid": "S-1-5-18",
+        "KeyLength": "0",
+        "ElevatedToken": "%%1842",
+        "TargetLinkedLogonId": "0x0",
+        "TargetOutboundDomainName": "-",
+        "TransmittedServices": "-",
+        "SubjectLogonId": "0x3e7",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}"
+      },
+      "record_id": 108958,
+      "event_id": 4624,
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "channel": "Security",
+      "keywords": [
+        "Audit Success"
+      ],
+      "task": "Logon",
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}",
+      "api": "wineventlog",
+      "opcode": "Info",
+      "version": 2
+    },
+    "event": {
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing",
+      "action": "Logon",
+      "created": "2022-12-27T20:24:57.867Z"
+    },
+    "host": {
+      "architecture": "x86_64",
+      "os": {
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)",
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "name": "EC2AMAZ-QKFFDE6",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6"
+    }
+  },
+  {
+    "@timestamp": "2022-12-27T16:33:43.345Z",
+    "message": "An account was successfully logged on.\n\nSubject:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tEC2AMAZ-QKFFDE6$\n\tAccount Domain:\t\tWORKGROUP\n\tLogon ID:\t\t0x3E7\n\nLogon Information:\n\tLogon Type:\t\t5\n\tRestricted Admin Mode:\t-\n\tVirtual Account:\t\tNo\n\tElevated Token:\t\tYes\n\nImpersonation Level:\t\tImpersonation\n\nNew Logon:\n\tSecurity ID:\t\tS-1-5-18\n\tAccount Name:\t\tSYSTEM\n\tAccount Domain:\t\tNT AUTHORITY\n\tLogon ID:\t\t0x3E7\n\tLinked Logon ID:\t\t0x0\n\tNetwork Account Name:\t-\n\tNetwork Account Domain:\t-\n\tLogon GUID:\t\t{00000000-0000-0000-0000-000000000000}\n\nProcess Information:\n\tProcess ID:\t\t0x318\n\tProcess Name:\t\tC:\\Windows\\System32\\services.exe\n\nNetwork Information:\n\tWorkstation Name:\t-\n\tSource Network Address:\t-\n\tSource Port:\t\t-\n\nDetailed Authentication Information:\n\tLogon Process:\t\tAdvapi  \n\tAuthentication Package:\tNegotiate\n\tTransited Services:\t-\n\tPackage Name (NTLM only):\t-\n\tKey Length:\t\t0\n\nThis event is generated when a logon session is created. It is generated on the computer that was accessed.\n\nThe subject fields indicate the account on the local system which requested the logon. This is most commonly a service such as the Server service, or a local process such as Winlogon.exe or Services.exe.\n\nThe logon type field indicates the kind of logon that occurred. The most common types are 2 (interactive) and 3 (network).\n\nThe New Logon fields indicate the account for whom the new logon was created, i.e. the account that was logged on.\n\nThe network fields indicate where a remote logon request originated. Workstation name is not always available and may be left blank in some cases.\n\nThe impersonation level field indicates the extent to which a process in the logon session can impersonate.\n\nThe authentication information fields provide detailed information about this specific logon request.\n\t- Logon GUID is a unique identifier that can be used to correlate this event with a KDC event.\n\t- Transited services indicate which intermediate services have participated in this logon request.\n\t- Package name indicates which sub-protocol was used among the NTLM protocols.\n\t- Key length indicates the length of the generated session key. This will be 0 if no session key was requested.",
+    "winlog": {
+      "process": {
+        "thread": {
+          "id": 852
+        },
+        "pid": 804
+      },
+      "activity_id": "{f04d833f-1a10-0000-d384-4df0101ad901}",
+      "channel": "Security",
+      "task": "Logon",
+      "opcode": "Info",
+      "version": 2,
+      "provider_name": "Microsoft-Windows-Security-Auditing",
+      "keywords": [
+        "Audit Success"
+      ],
+      "event_data": {
+        "SubjectLogonId": "0x3e7",
+        "TargetLogonId": "0x3e7",
+        "TargetUserSid": "S-1-5-18",
+        "VirtualAccount": "%%1843",
+        "TargetDomainName": "NT AUTHORITY",
+        "RestrictedAdminMode": "-",
+        "ProcessName": "C:\\Windows\\System32\\services.exe",
+        "ElevatedToken": "%%1842",
+        "ProcessId": "0x318",
+        "TargetLinkedLogonId": "0x0",
+        "AuthenticationPackageName": "Negotiate",
+        "TargetOutboundDomainName": "-",
+        "IpPort": "-",
+        "TransmittedServices": "-",
+        "IpAddress": "-",
+        "ImpersonationLevel": "%%1833",
+        "TargetUserName": "SYSTEM",
+        "LogonGuid": "{00000000-0000-0000-0000-000000000000}",
+        "SubjectUserName": "EC2AMAZ-QKFFDE6$",
+        "WorkstationName": "-",
+        "LogonProcessName": "Advapi  ",
+        "LmPackageName": "-",
+        "KeyLength": "0",
+        "LogonType": "5",
+        "SubjectDomainName": "WORKGROUP",
+        "TargetOutboundUserName": "-",
+        "SubjectUserSid": "S-1-5-18"
+      },
+      "record_id": 108956,
+      "event_id": 4624,
+      "computer_name": "EC2AMAZ-QKFFDE6",
+      "api": "wineventlog",
+      "provider_guid": "{54849625-5478-4994-a5ba-3e3b0328c30d}"
+    },
+    "event": {
+      "action": "Logon",
+      "created": "2022-12-27T20:24:57.867Z",
+      "outcome": "success",
+      "kind": "event",
+      "code": 4624,
+      "provider": "Microsoft-Windows-Security-Auditing"
+    },
+    "host": {
+      "os": {
+        "build": "20348.1366",
+        "type": "windows",
+        "platform": "windows",
+        "version": "10.0",
+        "family": "windows",
+        "name": "Windows Server 2022 Datacenter",
+        "kernel": "10.0.20348.1366 (WinBuild.160101.0800)"
+      },
+      "id": "9fd5e9f9-fecb-4a81-91b1-5a4368efef12",
+      "ip": [
+        "fe80::b1f1:86c3:c3fb:8097",
+        "172.31.84.109"
+      ],
+      "mac": [
+        "12:81:05:d6:d5:4f"
+      ],
+      "hostname": "EC2AMAZ-QKFFDE6",
+      "name": "EC2AMAZ-QKFFDE6",
+      "architecture": "x86_64"
+    },
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "agent": {
+      "ephemeral_id": "795ee5e3-956c-4d7b-9e75-4f20034d2294",
+      "id": "1330b689-9f3a-4ce9-8434-940731941cb8",
+      "name": "EC2AMAZ-QKFFDE6",
+      "type": "winlogbeat",
+      "version": "7.12.1",
+      "hostname": "EC2AMAZ-QKFFDE6"
+    },
+    "cloud": {
+      "account": {
+        "id": "397721537873"
+      },
+      "image": {
+        "id": "ami-0be29bafdaad782db"
+      },
+      "provider": "aws",
+      "instance": {
+        "id": "i-0ed8f078417e7c314"
+      },
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "availability_zone": "us-east-1d"
+    },
+    "log": {
+      "level": "information"
+    }
+  }
+]

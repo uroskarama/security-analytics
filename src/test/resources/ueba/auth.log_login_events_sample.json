@@ -1,0 +1,140 @@
+[
+  {
+    "agent": {
+      "hostname": "ip-172-31-81-138",
+      "name": "ip-172-31-81-138",
+      "id": "d5f5eba1-3a48-4c60-842f-27120ad826bd",
+      "ephemeral_id": "d863f416-eb30-48cb-9ece-f5e799736213",
+      "type": "filebeat",
+      "version": "7.12.1"
+    },
+    "process": {
+      "name": "sshd",
+      "pid": 20498
+    },
+    "log": {
+      "file": {
+        "path": "/var/log/auth.log"
+      },
+      "offset": 102659
+    },
+    "source": {
+      "geo": {
+        "continent_name": "Europe",
+        "country_iso_code": "RS",
+        "country_name": "Serbia",
+        "location": {
+          "lon": 20.458,
+          "lat": 44.8195
+        }
+      },
+      "as": {
+        "number": 35573,
+        "organization": {
+          "name": "AVCOM d.o.o."
+        }
+      },
+      "port": 22801,
+      "ip": "46.235.97.26"
+    },
+    "fileset": {
+      "name": "auth"
+    },
+    "cloud": {
+      "availability_zone": "us-east-1d",
+      "image": {
+        "id": "ami-0574da719dca65348"
+      },
+      "instance": {
+        "id": "i-067dab8d22d6f8ed2"
+      },
+      "provider": "aws",
+      "machine": {
+        "type": "t2.micro"
+      },
+      "region": "us-east-1",
+      "account": {
+        "id": "397721537873"
+      }
+    },
+    "input": {
+      "type": "log"
+    },
+    "@timestamp": "2022-12-27T16:06:48.000Z",
+    "system": {
+      "auth": {
+        "ssh": {
+          "method": "publickey",
+          "signature": "RSA SHA256:zMwNYoblcrG71mCbnVIoJGZDtWN/sj/EhsNx4vILOvA",
+          "event": "Accepted"
+        }
+      }
+    },
+    "ecs": {
+      "version": "1.8.0"
+    },
+    "related": {
+      "hosts": [
+        "ip-172-31-81-138"
+      ],
+      "ip": [
+        "46.235.97.26"
+      ],
+      "user": [
+        "ubuntu"
+      ]
+    },
+    "service": {
+      "type": "system"
+    },
+    "host": {
+      "hostname": "ip-172-31-81-138",
+      "os": {
+        "kernel": "5.15.0-1026-aws",
+        "codename": "jammy",
+        "name": "Ubuntu",
+        "type": "linux",
+        "family": "debian",
+        "version": "22.04.1 LTS (Jammy Jellyfish)",
+        "platform": "ubuntu"
+      },
+      "containerized": false,
+      "ip": [
+        "172.31.81.138",
+        "fe80::106a:bdff:fe02:98ad",
+        "172.17.0.1",
+        "fe80::42:40ff:feaa:c1a6",
+        "172.18.0.1",
+        "fe80::42:7fff:fe96:bba4"
+      ],
+      "name": "ip-172-31-81-138",
+      "id": "972ad8dc7b1042ae9186912b70780485",
+      "mac": [
+        "12:6a:bd:02:98:ad",
+        "02:42:40:aa:c1:a6",
+        "02:42:7f:96:bb:a4"
+      ],
+      "architecture": "x86_64"
+    },
+    "event": {
+      "ingested": "2022-12-27T16:08:08.823938379Z",
+      "timezone": "+00:00",
+      "kind": "event",
+      "module": "system",
+      "action": "ssh_login",
+      "type": [
+        "authentication_success",
+        "info"
+      ],
+      "category": [
+        "authentication",
+        "session"
+      ],
+      "dataset": "system.auth",
+      "outcome": "success"
+    },
+    "user": {
+      "name": "ubuntu"
+    }
+  }
+]

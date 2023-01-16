@@ -8,14 +8,14 @@
       "composite": {
         "size": 2,
         "sources": [
-          { "user_id": { "terms": { "field": "winlog.event_data.TargetUserSid.keyword" } } }
+          { "user_id": { "terms": { "field": "userIdentity.arn.keyword" } } }
         ]
       },
       "aggregations": {
         "ip_list": {
           "scripted_metric": {
             "init_script": "state['ips'] = new ArrayList()",
-            "map_script": "state['ip'] = doc['winlog.event_data.IpAddress.keyword']; state.ips.add(state['ip'].value)",
+            "map_script": "state['ip'] = doc['sourceIPAddress.keyword']; state.ips.add(state['ip'].value)",
             "combine_script": "List combined = new ArrayList(); for (ip in state.ips) combined.add(ip); return combined",
             "reduce_script": "List final = new ArrayList(); for (ip_list in states) final.addAll(ip_list); return final.stream().distinct().sorted().collect(Collectors.toList());"
           }
