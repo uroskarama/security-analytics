@@ -55,6 +55,7 @@ import org.opensearch.securityanalytics.action.UpdateIndexMappingsRequest;
 import org.opensearch.securityanalytics.config.monitors.DetectorMonitorConfig;
 import org.opensearch.securityanalytics.model.Detector;
 import org.opensearch.securityanalytics.model.Rule;
+import org.opensearch.securityanalytics.ueba.aggregator.UebaAggregator;
 import org.opensearch.test.rest.OpenSearchRestTestCase;
 
 
@@ -391,6 +392,10 @@ public class SecurityAnalyticsRestTestCase extends OpenSearchRestTestCase {
         return new StringEntity(toJsonString(request), ContentType.APPLICATION_JSON);
     }
 
+    protected HttpEntity toHttpEntity(UebaAggregator aggregator) throws IOException {
+        return new StringEntity(toJsonString(aggregator), ContentType.APPLICATION_JSON);
+    }
+
     protected RestStatus restStatus(Response response) {
         return RestStatus.fromCode(response.getStatusLine().getStatusCode());
     }
@@ -417,6 +422,11 @@ public class SecurityAnalyticsRestTestCase extends OpenSearchRestTestCase {
     private String toJsonString(UpdateIndexMappingsRequest request) throws IOException {
         XContentBuilder builder = XContentFactory.jsonBuilder();
         return IndexUtilsKt.string(shuffleXContent(request.toXContent(builder, ToXContent.EMPTY_PARAMS)));
+    }
+
+    public String toJsonString(UebaAggregator aggregator) throws IOException {
+        XContentBuilder builder = XContentFactory.jsonBuilder();
+        return IndexUtilsKt.string(shuffleXContent(aggregator.toXContent(builder, ToXContent.EMPTY_PARAMS)));
     }
 
     private String alertingScheduledJobMappings() {

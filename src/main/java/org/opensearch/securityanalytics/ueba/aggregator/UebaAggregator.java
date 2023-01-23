@@ -1,22 +1,25 @@
 package org.opensearch.securityanalytics.ueba.aggregator;
 
+import org.opensearch.common.ParseField;
 import org.opensearch.common.io.stream.StreamInput;
 import org.opensearch.common.io.stream.StreamOutput;
 import org.opensearch.common.io.stream.Writeable;
-import org.opensearch.common.xcontent.ToXContentObject;
-import org.opensearch.common.xcontent.XContentBuilder;
-import org.opensearch.common.xcontent.XContentParser;
-import org.opensearch.common.xcontent.XContentParserUtils;
+import org.opensearch.common.xcontent.*;
 import org.opensearch.jobscheduler.spi.ScheduledJobParameter;
 import org.opensearch.jobscheduler.spi.schedule.IntervalSchedule;
 import org.opensearch.jobscheduler.spi.schedule.Schedule;
 import org.opensearch.jobscheduler.spi.schedule.ScheduleParser;
+import org.opensearch.securityanalytics.SecurityAnalyticsPlugin;
+import org.opensearch.securityanalytics.model.Value;
+
 import java.io.IOException;
 import java.time.Instant;
 import java.util.Locale;
 import java.util.Objects;
 
 public class UebaAggregator implements ScheduledJobParameter, Writeable, ToXContentObject {
+
+    private static final String AGGREGATOR_TYPE = "aggregator";
     public static final String LAST_UPDATE_TIME_FIELD = "last_update_time";
     public static final String ENABLED_TIME_FIELD = "enabled_time";
     public static final String SCHEDULE_FIELD = "schedule";
@@ -24,7 +27,7 @@ public class UebaAggregator implements ScheduledJobParameter, Writeable, ToXCont
     public static final String NO_ID = "";
     public static final String SEARCH_REQUEST_STRING_FIELD = "search_request_string";
     public static final String ENTITY_INDEX_FIELD = "entity_index";
-    public static final String ENTITY_FIELD_NAME_FIELD = "entity_field";
+    public static final String ENTITY_FIELD_NAME_FIELD = "entity_field_name";
 
     public static final String SOURCE_INDEX_FIELD = "source_index";
 
@@ -40,11 +43,11 @@ public class UebaAggregator implements ScheduledJobParameter, Writeable, ToXCont
 
     private Long primaryTerm;
 
-    private String searchRequestString;
+    private Value searchRequestString;
 
     private String sourceIndex;
 
-    private Long batchSize;
+    private Integer pageSize;
 
     private String entityIndex;
 
@@ -59,7 +62,7 @@ public class UebaAggregator implements ScheduledJobParameter, Writeable, ToXCont
                           Long primaryTerm,
                           String searchRequestString,
                           String sourceIndex,
-                          Long batchSize,
+                          Integer pageSize,
                           String entityIndex,
                           String entityFieldName) {
         this.id = id;
@@ -69,9 +72,9 @@ public class UebaAggregator implements ScheduledJobParameter, Writeable, ToXCont
         this.schedule = schedule;
         this.seqNo = seqNo;
         this.primaryTerm = primaryTerm;
-        this.searchRequestString = searchRequestString;
+        this.searchRequestString = new Value(searchRequestString);
         this.sourceIndex = sourceIndex;
-        this.batchSize = batchSize;
+        this.pageSize = pageSize;
         this.entityIndex = entityIndex;
         this.entityFieldName = entityFieldName;
     }
@@ -87,7 +90,7 @@ public class UebaAggregator implements ScheduledJobParameter, Writeable, ToXCont
             sin.readLong(),
             sin.readString(),
             sin.readString(),
-            sin.readLong(),
+            sin.readInt(),
             sin.readString(),
             sin.readString()
         );
@@ -106,9 +109,9 @@ public class UebaAggregator implements ScheduledJobParameter, Writeable, ToXCont
         schedule.writeTo(out); // FIXME should we cover both CRON and INTERVAL schedule?
         out.writeLong(seqNo);
         out.writeLong(primaryTerm);
-        out.writeString(searchRequestString);
+        out.writeString(searchRequestString.getValue());
         out.writeString(sourceIndex);
-        out.writeLong(batchSize);
+        out.writeInt(pageSize);
         out.writeString(entityIndex);
         out.writeString(entityFieldName);
     }
@@ -133,7 +136,7 @@ public class UebaAggregator implements ScheduledJobParameter, Writeable, ToXCont
 
         builder.field(SEARCH_REQUEST_STRING_FIELD, searchRequestString);
         builder.field(SOURCE_INDEX_FIELD, sourceIndex);
-        builder.field(BATCH_SIZE_FIELD, batchSize);
+        builder.field(BATCH_SIZE_FIELD, pageSize);
         builder.field(ENTITY_INDEX_FIELD, entityIndex);
         builder.field(ENTITY_FIELD_NAME_FIELD, entityFieldName);
 
@@ -149,9 +152,9 @@ public class UebaAggregator implements ScheduledJobParameter, Writeable, ToXCont
         Instant lastUpdateTime = null;
         Instant enabledTime = null;
         Boolean enabled = true;
-        String searchRequestString = null;
+        Value searchRequestString = null;
         String sourceIndex = null;
-        Long batchSize = 0L;
+        Integer batchSize = 0;
         String entityIndex = null;
         String entityFieldName =  null;
 
@@ -188,12 +191,14 @@ public class UebaAggregator implements ScheduledJobParameter, Writeable, ToXCont
                     }
                     break;
                 case SEARCH_REQUEST_STRING_FIELD:
-                    searchRequestString = xcp.text();
+                    searchRequestString = Value.parse(xcp);
                     break;
                 case SOURCE_INDEX_FIELD:
                     sourceIndex = xcp.text();
+                    break;
                 case BATCH_SIZE_FIELD:
-                    batchSize = xcp.longValue();
+                    batchSize = xcp.intValue();
+                    break;
                 case ENTITY_INDEX_FIELD:
                     entityIndex = xcp.text();
                     break;
@@ -216,11 +221,21 @@ public class UebaAggregator implements ScheduledJobParameter, Writeable, ToXCont
                 schedule,
                 seqNo,
                 primaryTerm,
-                searchRequestString,
+                searchRequestString.getValue(),
                 sourceIndex,
                 batchSize,
                 entityIndex,
                 entityFieldName);
+    }
+
+    public static final NamedXContentRegistry.Entry XCONTENT_REGISTRY = new NamedXContentRegistry.Entry(
+            UebaAggregator.class,
+            new ParseField(AGGREGATOR_TYPE),
+            xcp -> parse(xcp, null, null, null)
+    );
+
+    public static String aggregatorsIndex(){
+        return SecurityAnalyticsPlugin.SECURITY_ANALYTICS_JOB_INDEX;
     }
 
     @Override
@@ -276,60 +291,16 @@ public class UebaAggregator implements ScheduledJobParameter, Writeable, ToXCont
         this.schedule = schedule;
     }
 
-    public Long getSeqNo() {
-        return seqNo;
-    }
-
-    public void setSeqNo(Long seqNo) {
-        this.seqNo = seqNo;
-    }
-
-    public Long getPrimaryTerm() {
-        return primaryTerm;
-    }
-
-    public void setPrimaryTerm(Long primaryTerm) {
-        this.primaryTerm = primaryTerm;
-    }
-
     public String getSearchRequestString() {
-        return searchRequestString;
-    }
-
-    public void setSearchRequestString(String searchRequestString) {
-        this.searchRequestString = searchRequestString;
-    }
-
-    public String getEntityIndex() {
-        return entityIndex;
-    }
-
-    public void setEntityIndex(String entityIndex) {
-        this.entityIndex = entityIndex;
-    }
-
-    public String getEntityFieldName() {
-        return entityFieldName;
-    }
-
-    public void setEntityFieldName(String entityFieldName) {
-        this.entityFieldName = entityFieldName;
+        return searchRequestString.getValue();
     }
 
     public String getSourceIndex() {
         return sourceIndex;
     }
 
-    public void setSourceIndex(String sourceIndex) {
-        this.sourceIndex = sourceIndex;
-    }
-
-    public Long getBatchSize() {
-        return batchSize;
-    }
-
-    public void setBatchSize(Long batchSize) {
-        this.batchSize = batchSize;
+    public Integer getPageSize() {
+        return pageSize;
     }
 
     @Override

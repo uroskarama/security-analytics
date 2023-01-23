@@ -191,7 +191,7 @@ public class XContentTests extends OpenSearchTestCase {
     }
 
     public void testUebaJobParsing() throws IOException {
-        UebaAggregator uebaAggregatorJob = randomUebaJob();
+        UebaAggregator uebaAggregatorJob = randomUebaAggregator();
 
         XContentBuilder builder = XContentFactory.jsonBuilder();
         builder = uebaAggregatorJob.toXContent(builder, ToXContent.EMPTY_PARAMS);

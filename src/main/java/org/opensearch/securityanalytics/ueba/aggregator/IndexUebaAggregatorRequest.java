@@ -6,6 +6,7 @@ package org.opensearch.securityanalytics.ueba.aggregator;
 
 import org.opensearch.action.ActionRequest;
 import org.opensearch.action.ActionRequestValidationException;
+import org.opensearch.action.ValidateActions;
 import org.opensearch.action.support.WriteRequest;
 import org.opensearch.common.io.stream.StreamInput;
 import org.opensearch.common.io.stream.StreamOutput;
@@ -44,7 +45,15 @@ public class IndexUebaAggregatorRequest extends ActionRequest {
 
     @Override
     public ActionRequestValidationException validate() {
-        return null;
+        ActionRequestValidationException validationException = null;
+        if (uebaAggregator == null)
+            validationException = ValidateActions.addValidationError("no aggregator specified", validationException);
+
+        if (uebaAggregator.getSearchRequestString() == null || uebaAggregator.getSearchRequestString().length() == 0)
+            validationException = ValidateActions.addValidationError("no search request string for aggregator specified", validationException);
+
+
+        return validationException;
     }
 
     @Override

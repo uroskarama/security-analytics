@@ -84,10 +84,7 @@ import org.opensearch.securityanalytics.transport.TransportGetMappingsViewAction
 import org.opensearch.securityanalytics.transport.TransportIndexDetectorAction;
 import org.opensearch.securityanalytics.transport.TransportSearchDetectorAction;
 import org.opensearch.securityanalytics.transport.TransportValidateRulesAction;
-import org.opensearch.securityanalytics.ueba.aggregator.AggregatorIndices;
-import org.opensearch.securityanalytics.ueba.aggregator.AggregatorService;
-import org.opensearch.securityanalytics.ueba.aggregator.UebaAggregator;
-import org.opensearch.securityanalytics.ueba.aggregator.UebaAggregatorRunner;
+import org.opensearch.securityanalytics.ueba.aggregator.*;
 import org.opensearch.securityanalytics.ueba.mlscheduler.UebaMlSchedulerRunner;
 import org.opensearch.securityanalytics.util.DetectorIndices;
 import org.opensearch.securityanalytics.util.RuleIndices;
@@ -159,8 +156,8 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
         ruleTopicIndices = new RuleTopicIndices(client, clusterService);
         mapperService = new MapperService(client.admin().indices());
         ruleIndices = new RuleIndices(client, clusterService, threadPool);
-        aggregatorIndices = new AggregatorIndices(client);
-        aggregatorService = new AggregatorService(client);
+        aggregatorIndices = new AggregatorIndices(client.admin(), clusterService, threadPool);
+        aggregatorService = new AggregatorService(client, xContentRegistry);
 
         SecurityAnalyticsRunner securityAnalyticsRunner = SecurityAnalyticsRunner.getJobRunnerInstance();
         securityAnalyticsRunner.setAggregatorRunner(new UebaAggregatorRunner(aggregatorService));
@@ -197,7 +194,8 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
                 new RestIndexRuleAction(),
                 new RestSearchRuleAction(),
                 new RestDeleteRuleAction(),
-                new RestValidateRulesAction()
+                new RestValidateRulesAction(),
+                new RestIndexUebaAggregatorAction()
         );
     }
 
@@ -206,7 +204,8 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
         return List.of(
                 Detector.XCONTENT_REGISTRY,
                 DetectorInput.XCONTENT_REGISTRY,
-                Rule.XCONTENT_REGISTRY
+                Rule.XCONTENT_REGISTRY,
+                UebaAggregator.XCONTENT_REGISTRY
         );
     }
 
@@ -247,7 +246,8 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
                 new ActionPlugin.ActionHandler<>(IndexRuleAction.INSTANCE, TransportIndexRuleAction.class),
                 new ActionPlugin.ActionHandler<>(SearchRuleAction.INSTANCE, TransportSearchRuleAction.class),
                 new ActionPlugin.ActionHandler<>(DeleteRuleAction.INSTANCE, TransportDeleteRuleAction.class),
-                new ActionPlugin.ActionHandler<>(ValidateRulesAction.INSTANCE, TransportValidateRulesAction.class)
+                new ActionPlugin.ActionHandler<>(ValidateRulesAction.INSTANCE, TransportValidateRulesAction.class),
+                new ActionPlugin.ActionHandler<>(IndexUebaAggregatorAction.INSTANCE, TransportIndexUebaAggregatorAction.class)
         );
     }
 }

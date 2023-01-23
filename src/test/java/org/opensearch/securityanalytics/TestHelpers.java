@@ -21,15 +21,15 @@ import org.opensearch.commons.alerting.model.action.Throttle;
 import org.opensearch.commons.authuser.User;
 import org.opensearch.script.Script;
 import org.opensearch.script.ScriptType;
-import org.opensearch.securityanalytics.model.Detector;
-import org.opensearch.securityanalytics.model.DetectorInput;
-import org.opensearch.securityanalytics.model.DetectorRule;
-import org.opensearch.securityanalytics.model.DetectorTrigger;
+import org.opensearch.securityanalytics.model.*;
 import org.opensearch.securityanalytics.ueba.aggregator.UebaAggregator;
 import org.opensearch.test.OpenSearchTestCase;
 import org.opensearch.test.rest.OpenSearchRestTestCase;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -1611,12 +1611,28 @@ public class TestHelpers {
         return XContentBuilder.builder(XContentType.JSON.xContent());
     }
 
-    public static UebaAggregator randomUebaJob() {
+    public static String exampleAggregatorSearchString() throws IOException {
+        return readResource("aggregations/impossible_time_travel/winlog.json");
+    }
+
+    public static String readResource(String name) throws IOException {
+        try (InputStream inputStream = SecurityAnalyticsPlugin.class.getClassLoader().getResourceAsStream(name)) {
+            if (inputStream == null) {
+                throw new IOException("Resource not found: " + name);
+            }
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                return reader.lines().collect(Collectors.joining("\n"));
+            }
+        }
+    }
+
+    public static UebaAggregator randomUebaAggregator() throws IOException {
         boolean enabled = OpenSearchTestCase.randomBoolean();
         Instant enabledTime = null;
         if (enabled) {
             enabledTime = Instant.now().truncatedTo(ChronoUnit.MILLIS);
         }
+
         return new UebaAggregator(
                 OpenSearchRestTestCase.randomAlphaOfLength(10),
                 enabled,
@@ -1625,9 +1641,11 @@ public class TestHelpers {
                 new  org.opensearch.jobscheduler.spi.schedule.IntervalSchedule(Instant.now().truncatedTo(ChronoUnit.MILLIS), 5, ChronoUnit.MINUTES),
                 OpenSearchTestCase.randomLong(),
                 OpenSearchTestCase.randomLong(),
-                "",  // FIXME
-                "",
-                ""
+                exampleAggregatorSearchString(),
+                "test_index",
+                10,
+                "test_entity_index",
+                "test_name"
         );
     }
 }

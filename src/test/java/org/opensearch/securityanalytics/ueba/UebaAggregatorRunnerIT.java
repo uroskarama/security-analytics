@@ -26,7 +26,18 @@ public class UebaAggregatorRunnerIT extends SecurityAnalyticsRestTestCase {
         String index = ".opendistro-sa-config";
 
         String testId = "testId";
-        UebaAggregator uebaAggregatorJob = new UebaAggregator(testId, true, Instant.now(), Instant.now(), new IntervalSchedule(Instant.now(), 5,  ChronoUnit.MINUTES), 5L, 5L);
+        UebaAggregator uebaAggregatorJob = new UebaAggregator(testId,
+                true,
+                Instant.now(),
+                Instant.now(),
+                new IntervalSchedule(Instant.now(), 5,  ChronoUnit.MINUTES),
+                5L,
+                5L,
+                "",
+                "",
+                10,
+                "",
+                "");
         XContentBuilder builder = XContentFactory.jsonBuilder();
 
         String uebaJobJson = IndexUtilsKt.string(shuffleXContent(uebaAggregatorJob.toXContent(builder, ToXContent.EMPTY_PARAMS)));
