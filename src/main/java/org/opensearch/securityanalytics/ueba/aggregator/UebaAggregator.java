@@ -208,12 +208,6 @@ public class UebaAggregator implements ScheduledJobParameter, Writeable, ToXCont
             }
         }
 
-        if (enabled && enabledTime == null) {
-            enabledTime = Instant.now();
-        } else if (!enabled) {
-            enabledTime = null;
-        }
-
         return new UebaAggregator(id,
                 enabled,
                 lastUpdateTime,
@@ -271,24 +265,8 @@ public class UebaAggregator implements ScheduledJobParameter, Writeable, ToXCont
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public Boolean getEnabled() {
         return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public void setEnabledTime(Instant enabledTime) {
-        this.enabledTime = enabledTime;
-    }
-
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
     }
 
     public String getSearchRequestString() {
@@ -303,6 +281,13 @@ public class UebaAggregator implements ScheduledJobParameter, Writeable, ToXCont
         return pageSize;
     }
 
+    public String getEntityIndex() {
+        return entityIndex;
+    }
+
+    public String getEntityFieldName() {
+        return entityFieldName;
+    }
     @Override
     public boolean equals(Object o) {   // FIXME
         if (this == o) return true;

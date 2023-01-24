@@ -16,13 +16,13 @@ import java.io.IOException;
 
 public class IndexUebaAggregatorRequest extends ActionRequest {
 
-    private String aggregatorId;
+    private final String aggregatorId;
 
-    private WriteRequest.RefreshPolicy refreshPolicy;
+    private final WriteRequest.RefreshPolicy refreshPolicy;
 
-    private RestRequest.Method method;
+    private final RestRequest.Method method;
 
-    private UebaAggregator uebaAggregator;
+    private final UebaAggregator uebaAggregator;
 
     public IndexUebaAggregatorRequest(
             String aggregatorId,
@@ -48,6 +48,9 @@ public class IndexUebaAggregatorRequest extends ActionRequest {
         ActionRequestValidationException validationException = null;
         if (uebaAggregator == null)
             validationException = ValidateActions.addValidationError("no aggregator specified", validationException);
+
+        if (uebaAggregator.getId() == null || uebaAggregator.getId().length() == 0)
+            validationException = ValidateActions.addValidationError("missing aggregator id", validationException);
 
         if (uebaAggregator.getSearchRequestString() == null || uebaAggregator.getSearchRequestString().length() == 0)
             validationException = ValidateActions.addValidationError("no search request string for aggregator specified", validationException);

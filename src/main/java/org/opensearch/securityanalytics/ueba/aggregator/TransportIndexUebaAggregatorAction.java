@@ -19,10 +19,7 @@ import org.opensearch.cluster.service.ClusterService;
 import org.opensearch.common.inject.Inject;
 import org.opensearch.common.io.stream.NamedWriteableRegistry;
 import org.opensearch.common.settings.Settings;
-import org.opensearch.common.xcontent.LoggingDeprecationHandler;
-import org.opensearch.common.xcontent.NamedXContentRegistry;
-import org.opensearch.common.xcontent.XContentParser;
-import org.opensearch.common.xcontent.XContentType;
+import org.opensearch.common.xcontent.*;
 import org.opensearch.rest.RestStatus;
 import org.opensearch.search.builder.SearchSourceBuilder;
 import org.opensearch.securityanalytics.transport.SecureTransportAction;
@@ -122,13 +119,12 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
         }
     }
 
-    private void indexAggregator(UebaAggregator aggregator, ActionListener<IndexUebaAggregatorResponse> listener) throws SecurityAnalyticsException{
+    private void indexAggregator(UebaAggregator aggregator, ActionListener<IndexUebaAggregatorResponse> listener) throws SecurityAnalyticsException, IOException {
         IndexRequest indexRequest = new IndexRequest();
 
-        indexRequest.index(UebaAggregator.aggregatorsIndex()).source(aggregator, XContentType.JSON);
-
-        if (aggregator.getId() != null && aggregator.getId().length() > 0)
-            indexRequest.id(aggregator.getId());
+        indexRequest.index(UebaAggregator.aggregatorsIndex())
+                .source(aggregator.toXContent(XContentFactory.jsonBuilder(), null))
+                .id(aggregator.getId());
 
         client.index(indexRequest, new IndexListener(aggregator, listener));
     }
@@ -159,10 +155,17 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
 
         @Override
         public void onResponse(CreateIndexResponse createIndexResponse) {
-            if (!createIndexResponse.isAcknowledged())
-                listener.onFailure(new SecurityAnalyticsException("Unable to create aggregator index.", RestStatus.INTERNAL_SERVER_ERROR, null));
+            if (!createIndexResponse.isAcknowledged()) {
+                onFailure(null);
+                return;
+            }
 
-            indexAggregator(aggregator, listener);
+            try {
+                indexAggregator(aggregator, listener);
+
+            } catch (IOException e) {
+                listener.onFailure(new SecurityAnalyticsException("Unable to index aggregator.", RestStatus.INTERNAL_SERVER_ERROR, e));
+            }
         }
 
         @Override

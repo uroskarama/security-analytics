@@ -59,7 +59,7 @@ public class RestIndexUebaAggregatorAction extends BaseRestHandler {
         UebaAggregator uebaAggregator = UebaAggregator.parse(xcp, id, null, null);
         uebaAggregator.setLastUpdateTime(Instant.now());
 
-        IndexUebaAggregatorRequest indexUebaAggregatorRequest = new IndexUebaAggregatorRequest(id, refreshPolicy, request.method(), uebaAggregator);
+        IndexUebaAggregatorRequest indexUebaAggregatorRequest = new IndexUebaAggregatorRequest(uebaAggregator.getId(), refreshPolicy, request.method(), uebaAggregator);
         return channel -> client.execute(IndexUebaAggregatorAction.INSTANCE, indexUebaAggregatorRequest, indexAggregatorResponse(channel, request.method()));
 
     }

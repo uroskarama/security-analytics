@@ -1628,10 +1628,7 @@ public class TestHelpers {
 
     public static UebaAggregator randomUebaAggregator() throws IOException {
         boolean enabled = OpenSearchTestCase.randomBoolean();
-        Instant enabledTime = null;
-        if (enabled) {
-            enabledTime = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-        }
+        Instant enabledTime = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
         return new UebaAggregator(
                 OpenSearchRestTestCase.randomAlphaOfLength(10),
