@@ -184,8 +184,6 @@ public class AggregatorServiceIT extends SecurityAnalyticsRestTestCase {
 
         executeAggregator(aggregator);
 
-        Thread.sleep(5000);
-
         searchEntities();
 
     }
