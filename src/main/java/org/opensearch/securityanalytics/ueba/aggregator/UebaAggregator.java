@@ -301,5 +301,21 @@ public class UebaAggregator implements ScheduledJobParameter, Writeable, ToXCont
         return Objects.hash(id, enabled, lastUpdateTime, enabledTime, schedule);
     } // FIXME
 
-
+    @Override
+    public String toString() {
+        return "UebaAggregator{" +
+                "id='" + id + '\'' +
+                ", enabled=" + enabled +
+                ", lastUpdateTime=" + lastUpdateTime +
+                ", enabledTime=" + enabledTime +
+                ", schedule=" + schedule +
+                ", seqNo=" + seqNo +
+                ", primaryTerm=" + primaryTerm +
+                ", searchRequestString=" + searchRequestString +
+                ", sourceIndex='" + sourceIndex + '\'' +
+                ", pageSize=" + pageSize +
+                ", entityIndex='" + entityIndex + '\'' +
+                ", entityFieldName='" + entityFieldName + '\'' +
+                '}';
+    }
 }

@@ -196,7 +196,8 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
                 new RestDeleteRuleAction(),
                 new RestValidateRulesAction(),
                 new RestIndexUebaAggregatorAction(),
-                new RestGetUebaAggregatorAction()
+                new RestGetUebaAggregatorAction(),
+                new RestExecuteAggregatorAction()
         );
     }
 
@@ -249,7 +250,8 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
                 new ActionPlugin.ActionHandler<>(DeleteRuleAction.INSTANCE, TransportDeleteRuleAction.class),
                 new ActionPlugin.ActionHandler<>(ValidateRulesAction.INSTANCE, TransportValidateRulesAction.class),
                 new ActionPlugin.ActionHandler<>(IndexUebaAggregatorAction.INSTANCE, TransportIndexUebaAggregatorAction.class),
-                new ActionPlugin.ActionHandler<>(GetUebaAggregatorAction.INSTANCE, TransportGetUebaAggregatorAction.class)
+                new ActionPlugin.ActionHandler<>(GetUebaAggregatorAction.INSTANCE, TransportGetUebaAggregatorAction.class),
+                new ActionPlugin.ActionHandler<>(ExecuteAggregatorAction.INSTANCE, TransportExecuteAggregatorAction.class)
         );
     }
 }

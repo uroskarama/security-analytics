@@ -28,6 +28,7 @@ public class ExecuteAggregatorResponse extends ActionResponse implements ToXCont
     @Override
     public XContentBuilder toXContent(XContentBuilder xContentBuilder, Params params) throws IOException {
         xContentBuilder.startObject();
+        xContentBuilder.field("metadata");
         metadata.toXContent(xContentBuilder, params);
         return xContentBuilder.endObject();
     }

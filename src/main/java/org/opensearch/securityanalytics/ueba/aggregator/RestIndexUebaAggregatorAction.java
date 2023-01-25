@@ -51,7 +51,7 @@ public class RestIndexUebaAggregatorAction extends BaseRestHandler {
             refreshPolicy = WriteRequest.RefreshPolicy.parse(request.param(RestHandlerUtils.REFRESH));
         }
 
-        String id = request.param("aggregator_id", UebaAggregator.NO_ID);
+        String id = request.param(AGGREGATOR_ID, UebaAggregator.NO_ID);
 
         XContentParser xcp = request.contentParser();
         XContentParserUtils.ensureExpectedToken(XContentParser.Token.START_OBJECT, xcp.nextToken(), xcp);

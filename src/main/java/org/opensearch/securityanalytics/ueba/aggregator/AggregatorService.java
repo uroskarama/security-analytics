@@ -21,10 +21,7 @@ import org.opensearch.search.aggregations.metrics.ScriptedMetric;
 import org.opensearch.search.builder.SearchSourceBuilder;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.opensearch.securityanalytics.ueba.aggregator.AggregatorExecutionMetadata.AggregatorExecutionState.*;
 
@@ -41,20 +38,13 @@ public class AggregatorService {
         this.xContentRegistry = xContentRegistry;
     }
 
-
-
     public void execute(UebaAggregator aggregator, ActionListener<ExecuteAggregatorResponse> listener){
-
         AggregatorExecutionMetadata metadata = new AggregatorExecutionMetadata(aggregator, AGGREGATING);
 
         EventAggregatorFSM eventAggregatorFSM = new EventAggregatorFSM(aggregator, listener);
 
         eventAggregatorFSM.start(metadata);
     }
-
-
-
-
 
 
     private class EventAggregatorFSM {
@@ -69,11 +59,6 @@ public class AggregatorService {
         }
 
         public void nextStep(final AggregatorExecutionMetadata metadata, final AggregatorExecutionData data) {
-            // extract metadata (continuation key, etc..)
-            // extract docsToIndex
-            // index docsToIndex
-            // if shouldContinue(metadata) client.search
-
             final AggregatorExecutionMetadata.AggregatorExecutionState state = metadata.getState();
             try {
                 switch (state){
@@ -90,6 +75,7 @@ public class AggregatorService {
                         break;
                     case DONE:
                         listener.onResponse(new ExecuteAggregatorResponse(metadata));
+                        break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + state);
                 }
@@ -120,16 +106,13 @@ public class AggregatorService {
         }
 
         private AggregatorExecutionMetadata metadataAfterAggregating(AggregatorExecutionMetadata metadata, SearchResponse searchResponse){
-            // get&set afterKey
-            // set state
-            // set elapsed time
-
             Map<String, Object> afterKey = null;
 
             for(Aggregation aggregation: searchResponse.getAggregations()){
                 if (aggregation instanceof CompositeAggregation)
                     afterKey = ((CompositeAggregation) aggregation).afterKey();
             }
+
             return new AggregatorExecutionMetadata(aggregator, INDEXING, afterKey);
         }
 
@@ -139,11 +122,17 @@ public class AggregatorService {
 
             for (AggregatorExecutionData.EntityDocument entityDocument: data.entities){
                 UpdateRequest updateRequest = new UpdateRequest()
+                        .index(aggregator.getEntityIndex())
                         .id(entityDocument.id)
                         .docAsUpsert(true)
                         .doc(entityDocument.fields);
 
                 request.add(updateRequest);
+            }
+
+            if (request.numberOfActions() == 0){
+                nextStep(metadataAfterUpserting(metadata), null);
+                return;
             }
 
             client.bulk(request, new ActionListener<>() {
@@ -161,32 +150,17 @@ public class AggregatorService {
 
         private AggregatorExecutionMetadata metadataAfterUpserting(AggregatorExecutionMetadata metadata) {
             if(metadata.getAfterKey() != null)
-                return new AggregatorExecutionMetadata(aggregator, AGGREGATING);
+                return new AggregatorExecutionMetadata(aggregator, AGGREGATING, metadata.getAfterKey());
 
-            return new AggregatorExecutionMetadata(aggregator, DONE);
+            return new AggregatorExecutionMetadata(aggregator, DONE, metadata.getAfterKey());
         }
     }
 
     private SearchRequest parseSearchRequestString(String searchRequestString, String index) throws IOException {
-        /*
-        XContentParser xcp = XContentType.JSON.xContent().createParser(
-                xContentRegistry,
-                LoggingDeprecationHandler.INSTANCE, searchRequestString
-        );
-
-         */
-
         XContentParser xcp = JsonXContent.jsonXContent.createParser(xContentRegistry,
                 LoggingDeprecationHandler.INSTANCE, searchRequestString);
 
-        // System.out.println(xcp.map());
-
-
-        SearchSourceBuilder searchSourceBuilder = SearchSourceBuilder.fromXContent(xcp);
-        System.out.println(searchSourceBuilder.query());
-
-        //searchSourceBuilder = searchSourceBuilder.size(0);
-
+        SearchSourceBuilder searchSourceBuilder = SearchSourceBuilder.fromXContent(xcp).size(0);
 
         return new SearchRequest(index)
                 .source(searchSourceBuilder)
