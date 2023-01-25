@@ -173,10 +173,7 @@ public class AggregatorServiceIT extends SecurityAnalyticsRestTestCase {
         log.debug("Entities found: " + new String(searchResponse.getEntity().getContent().readAllBytes()));
     }
 
-    public void testAggregatorService() throws IOException, InterruptedException {
-
-        TestSample testSample = TestSample.WINLOG;
-
+    public void runAggregatorServiceTest(TestSample testSample) throws IOException, InterruptedException {
         createEntityIndex();
 
         indexSampleData(testSample);
@@ -191,6 +188,18 @@ public class AggregatorServiceIT extends SecurityAnalyticsRestTestCase {
 
         searchEntities();
 
+    }
+
+    public void testAggregatorServiceOnWinlogData() throws IOException, InterruptedException {
+        runAggregatorServiceTest(TestSample.WINLOG);
+    }
+
+    public void testAggregatorServiceOnAuthData() throws IOException, InterruptedException {
+        runAggregatorServiceTest(TestSample.AUTH);
+    }
+
+    public void testAggregatorServiceOnCloudtrailData() throws IOException, InterruptedException {
+        runAggregatorServiceTest(TestSample.CLOUDTRAIL);
     }
 
     private String readResource(String name) throws IOException {
