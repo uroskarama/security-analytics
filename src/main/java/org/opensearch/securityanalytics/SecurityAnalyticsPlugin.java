@@ -85,7 +85,8 @@ import org.opensearch.securityanalytics.transport.TransportIndexDetectorAction;
 import org.opensearch.securityanalytics.transport.TransportSearchDetectorAction;
 import org.opensearch.securityanalytics.transport.TransportValidateRulesAction;
 import org.opensearch.securityanalytics.ueba.aggregator.*;
-import org.opensearch.securityanalytics.ueba.mlscheduler.UebaMlSchedulerRunner;
+import org.opensearch.securityanalytics.ueba.core.UEBAJobIndices;
+import org.opensearch.securityanalytics.ueba.inference.*;
 import org.opensearch.securityanalytics.util.DetectorIndices;
 import org.opensearch.securityanalytics.util.RuleIndices;
 import org.opensearch.securityanalytics.util.RuleTopicIndices;
@@ -103,6 +104,7 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
     public static final String RULE_BASE_URI = PLUGINS_BASE_URI + "/rules";
 
     public static final String UEBA_AGGREGATOR_BASE_URI = PLUGINS_BASE_URI + "/ueba/aggregator";
+    public static final String UEBA_INFERENCE_BASE_URI = PLUGINS_BASE_URI + "/ueba/inference";
     public static final String SECURITY_ANALYTICS_JOB_INDEX = ".opendistro-sa-config";
     public static final String SECURITY_ANALYTICS_JOB_TYPE = "opendistro-security-analytics";
 
@@ -114,7 +116,7 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
 
     private RuleIndices ruleIndices;
 
-    private AggregatorIndices aggregatorIndices;
+    private org.opensearch.securityanalytics.ueba.core.UEBAJobIndices UEBAJobIndices;
 
     private AggregatorService aggregatorService;
 
@@ -156,14 +158,14 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
         ruleTopicIndices = new RuleTopicIndices(client, clusterService);
         mapperService = new MapperService(client.admin().indices());
         ruleIndices = new RuleIndices(client, clusterService, threadPool);
-        aggregatorIndices = new AggregatorIndices(client.admin(), clusterService, threadPool);
+        UEBAJobIndices = new UEBAJobIndices(client.admin(), clusterService, threadPool);
         aggregatorService = new AggregatorService(client, xContentRegistry);
 
         SecurityAnalyticsRunner securityAnalyticsRunner = SecurityAnalyticsRunner.getJobRunnerInstance();
         securityAnalyticsRunner.setAggregatorRunner(new UebaAggregatorRunner(aggregatorService));
-        securityAnalyticsRunner.setMlSchedulerRunner(new UebaMlSchedulerRunner());
+        securityAnalyticsRunner.setMlSchedulerRunner(new EntityInferenceRunner());
 
-        return List.of(detectorIndices, ruleTopicIndices, ruleIndices, mapperService, aggregatorIndices, aggregatorService);
+        return List.of(detectorIndices, ruleTopicIndices, ruleIndices, mapperService, UEBAJobIndices, aggregatorService);
     }
 
     @Override
@@ -197,7 +199,10 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
                 new RestValidateRulesAction(),
                 new RestIndexUebaAggregatorAction(),
                 new RestGetUebaAggregatorAction(),
-                new RestExecuteAggregatorAction()
+                new RestExecuteAggregatorAction(),
+                new RestIndexInferenceAction(),
+                new RestGetInferenceAction(),
+                new RestExecuteInferenceAction()
         );
     }
 
@@ -207,7 +212,8 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
                 Detector.XCONTENT_REGISTRY,
                 DetectorInput.XCONTENT_REGISTRY,
                 Rule.XCONTENT_REGISTRY,
-                UebaAggregator.XCONTENT_REGISTRY
+                UebaAggregator.XCONTENT_REGISTRY,
+                EntityInference.XCONTENT_REGISTRY
         );
     }
 
@@ -251,7 +257,10 @@ public class SecurityAnalyticsPlugin extends Plugin implements ActionPlugin, Job
                 new ActionPlugin.ActionHandler<>(ValidateRulesAction.INSTANCE, TransportValidateRulesAction.class),
                 new ActionPlugin.ActionHandler<>(IndexUebaAggregatorAction.INSTANCE, TransportIndexUebaAggregatorAction.class),
                 new ActionPlugin.ActionHandler<>(GetUebaAggregatorAction.INSTANCE, TransportGetUebaAggregatorAction.class),
-                new ActionPlugin.ActionHandler<>(ExecuteAggregatorAction.INSTANCE, TransportExecuteAggregatorAction.class)
-        );
+                new ActionPlugin.ActionHandler<>(IndexEntityInferenceAction.INSTANCE, TransportIndexInferenceAction.class),
+                new ActionPlugin.ActionHandler<>(GetInferenceAction.INSTANCE, TransportGetInferenceAction.class),
+                new ActionPlugin.ActionHandler<>(ExecuteAggregatorAction.INSTANCE, TransportExecuteAggregatorAction.class),
+                new ActionPlugin.ActionHandler<>(ExecuteInferenceAction.INSTANCE, TransportExecuteInferenceAction.class)
+                );
     }
 }

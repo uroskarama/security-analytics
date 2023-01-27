@@ -1,4 +1,4 @@
-package org.opensearch.securityanalytics.ueba.aggregator;
+package org.opensearch.securityanalytics.ueba.inference;
 
 import org.opensearch.common.ParseField;
 import org.opensearch.common.io.stream.StreamInput;
@@ -18,43 +18,47 @@ import java.time.Instant;
 import java.util.Locale;
 import java.util.Objects;
 
-public class UebaAggregator implements UEBAJobParameter {
+public class EntityInference implements UEBAJobParameter {
 
-    public static final String AGGREGATOR_TYPE = "aggregator";
-    public static final String ENTITY_FIELD_NAME_FIELD = "entity_field_name";
+    public static final String INFERENCE_TYPE = "inference";
+
+    public static final String LAST_UPDATE_TIME_FIELD = "last_update_time";
+    public static final String ENABLED_TIME_FIELD = "enabled_time";
+    public static final String SCHEDULE_FIELD = "schedule";
+    public static final String ENABLED_FIELD = "enabled";
+    public static final String NO_ID = "";
+    public static final String SEARCH_REQUEST_STRING_FIELD = "search_request_string";
+    public static final String ENTITY_INDEX_FIELD = "entity_index";
+    public static final String SOURCE_INDEX_FIELD = "source_index";
+    public static final String BATCH_SIZE_FIELD = "batch_size";
+    public static final String WEBHOOK_URI_FIELD = "webhook_uri";
 
     private final String id;
     private final Boolean enabled;
     private Instant lastUpdateTime;
     private final Instant enabledTime;
     private final Schedule schedule;
-
     private final Long seqNo;
-
     private final Long primaryTerm;
-
     private final Value searchRequestString;
-
     private final String sourceIndex;
-
     private final Integer pageSize;
-
     private final String entityIndex;
 
-    private final String entityFieldName;
+    private final String webhookURI;
 
-    public UebaAggregator(String id,
-                          Boolean enabled,
-                          Instant lastUpdateTime,
-                          Instant enabledTime,
-                          Schedule schedule,
-                          Long seqNo,
-                          Long primaryTerm,
-                          String searchRequestString,
-                          String sourceIndex,
-                          Integer pageSize,
-                          String entityIndex,
-                          String entityFieldName) {
+    public EntityInference(String id,
+                           Boolean enabled,
+                           Instant lastUpdateTime,
+                           Instant enabledTime,
+                           Schedule schedule,
+                           Long seqNo,
+                           Long primaryTerm,
+                           String searchRequestString,
+                           String sourceIndex,
+                           Integer pageSize,
+                           String entityIndex,
+                           String webhookURI) {
         this.id = id;
         this.enabled = enabled;
         this.lastUpdateTime = lastUpdateTime;
@@ -66,28 +70,28 @@ public class UebaAggregator implements UEBAJobParameter {
         this.sourceIndex = sourceIndex;
         this.pageSize = pageSize;
         this.entityIndex = entityIndex;
-        this.entityFieldName = entityFieldName;
+        this.webhookURI = webhookURI;
     }
 
-    public UebaAggregator(StreamInput sin) throws IOException {
+    public EntityInference(StreamInput sin) throws IOException {
         this(
-            sin.readString(),
-            sin.readBoolean(),
-            sin.readInstant(),
-            sin.readInstant(),
-            new IntervalSchedule(sin),  // FIXME: Should we cover CronSchedule too?
-            sin.readLong(),
-            sin.readLong(),
-            sin.readString(),
-            sin.readString(),
-            sin.readInt(),
-            sin.readString(),
-            sin.readString()
+                sin.readString(),
+                sin.readBoolean(),
+                sin.readInstant(),
+                sin.readInstant(),
+                new IntervalSchedule(sin),  // FIXME: Should we cover CronSchedule too?
+                sin.readLong(),
+                sin.readLong(),
+                sin.readString(),
+                sin.readString(),
+                sin.readInt(),
+                sin.readString(),
+                sin.readString()
         );
     }
 
-    public static UebaAggregator readFrom(StreamInput sin) throws IOException {
-        return new UebaAggregator(sin);
+    public static EntityInference readFrom(StreamInput sin) throws IOException {
+        return new EntityInference(sin);
     }
 
     @Override
@@ -103,7 +107,7 @@ public class UebaAggregator implements UEBAJobParameter {
         out.writeString(sourceIndex);
         out.writeInt(pageSize);
         out.writeString(entityIndex);
-        out.writeString(entityFieldName);
+        out.writeString(webhookURI);
     }
 
     @Override
@@ -128,12 +132,11 @@ public class UebaAggregator implements UEBAJobParameter {
         builder.field(SOURCE_INDEX_FIELD, sourceIndex);
         builder.field(BATCH_SIZE_FIELD, pageSize);
         builder.field(ENTITY_INDEX_FIELD, entityIndex);
-        builder.field(ENTITY_FIELD_NAME_FIELD, entityFieldName);
-
+        builder.field(WEBHOOK_URI_FIELD, webhookURI);
         return builder.endObject();
     }
 
-    public static UebaAggregator parse(XContentParser xcp, String id, Long seqNo, Long primaryTerm) throws IOException {
+    public static EntityInference parse(XContentParser xcp, String id, Long seqNo, Long primaryTerm) throws IOException {
         if (id == null) {
             id = NO_ID;
         }
@@ -146,7 +149,7 @@ public class UebaAggregator implements UEBAJobParameter {
         String sourceIndex = null;
         Integer batchSize = 0;
         String entityIndex = null;
-        String entityFieldName =  null;
+        String webhookURI = null;
 
         XContentParserUtils.ensureExpectedToken(XContentParser.Token.START_OBJECT, xcp.currentToken(), xcp);
         while (xcp.nextToken() != XContentParser.Token.END_OBJECT) {
@@ -192,13 +195,13 @@ public class UebaAggregator implements UEBAJobParameter {
                 case ENTITY_INDEX_FIELD:
                     entityIndex = xcp.text();
                     break;
-                case ENTITY_FIELD_NAME_FIELD:
-                    entityFieldName = xcp.text();
+                case WEBHOOK_URI_FIELD:
+                    webhookURI = xcp.text();
                     break;
             }
         }
 
-        return new UebaAggregator(id,
+        return new EntityInference(id,
                 enabled,
                 lastUpdateTime,
                 enabledTime,
@@ -209,12 +212,12 @@ public class UebaAggregator implements UEBAJobParameter {
                 sourceIndex,
                 batchSize,
                 entityIndex,
-                entityFieldName);
+                webhookURI);
     }
 
     public static final NamedXContentRegistry.Entry XCONTENT_REGISTRY = new NamedXContentRegistry.Entry(
-            UebaAggregator.class,
-            new ParseField(AGGREGATOR_TYPE),
+            EntityInference.class,
+            new ParseField(INFERENCE_TYPE),
             xcp -> parse(xcp, null, null, null)
     );
 
@@ -243,55 +246,49 @@ public class UebaAggregator implements UEBAJobParameter {
         return enabled;
     }
 
-    @Override
     public void setLastUpdateTime(Instant lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
     }
 
-    @Override
     public String getId() {
         return id;
     }
 
     @Override
     public String getType() {
-        return AGGREGATOR_TYPE;
+        return INFERENCE_TYPE;
     }
 
-    @Override
     public Boolean getEnabled() {
         return enabled;
     }
 
-    @Override
     public String getSearchRequestString() {
         return searchRequestString.getValue();
     }
 
-    @Override
     public String getSourceIndex() {
         return sourceIndex;
     }
 
-    @Override
     public Integer getPageSize() {
         return pageSize;
     }
 
-    @Override
     public String getEntityIndex() {
         return entityIndex;
     }
 
-    public String getEntityFieldName() {
-        return entityFieldName;
+    public String getWebhookURI() {
+        return webhookURI;
     }
+
     @Override
     public boolean equals(Object o) {   // FIXME
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UebaAggregator uebaAggregator = (UebaAggregator) o;
-        return Objects.equals(id, uebaAggregator.id) && Objects.equals(enabled, uebaAggregator.enabled) && Objects.equals(lastUpdateTime, uebaAggregator.lastUpdateTime) && Objects.equals(enabledTime, uebaAggregator.enabledTime) && Objects.equals(schedule, uebaAggregator.schedule);
+        EntityInference inference = (EntityInference) o;
+        return Objects.equals(id, inference.id) && Objects.equals(enabled, inference.enabled) && Objects.equals(lastUpdateTime, inference.lastUpdateTime) && Objects.equals(enabledTime, inference.enabledTime) && Objects.equals(schedule, inference.schedule);
     }
 
     @Override
@@ -301,7 +298,7 @@ public class UebaAggregator implements UEBAJobParameter {
 
     @Override
     public String toString() {
-        return "UebaAggregator{" +
+        return "EntityInference{" +
                 "id='" + id + '\'' +
                 ", enabled=" + enabled +
                 ", lastUpdateTime=" + lastUpdateTime +
@@ -313,7 +310,7 @@ public class UebaAggregator implements UEBAJobParameter {
                 ", sourceIndex='" + sourceIndex + '\'' +
                 ", pageSize=" + pageSize +
                 ", entityIndex='" + entityIndex + '\'' +
-                ", entityFieldName='" + entityFieldName + '\'' +
+                ", webhookURI='" + webhookURI + '\'' +
                 '}';
     }
 }

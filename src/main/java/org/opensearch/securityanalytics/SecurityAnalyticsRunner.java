@@ -7,14 +7,14 @@ import org.opensearch.jobscheduler.spi.ScheduledJobParameter;
 import org.opensearch.jobscheduler.spi.ScheduledJobRunner;
 import org.opensearch.securityanalytics.ueba.aggregator.UebaAggregator;
 import org.opensearch.securityanalytics.ueba.aggregator.UebaAggregatorRunner;
-import org.opensearch.securityanalytics.ueba.mlscheduler.UebaMlScheduler;
-import org.opensearch.securityanalytics.ueba.mlscheduler.UebaMlSchedulerRunner;
+import org.opensearch.securityanalytics.ueba.inference.EntityInference;
+import org.opensearch.securityanalytics.ueba.inference.EntityInferenceRunner;
 
 public class SecurityAnalyticsRunner implements ScheduledJobRunner {
 
     private static final Logger log = LogManager.getLogger(SecurityAnalyticsRunner.class);
     private UebaAggregatorRunner aggregatorRunner;
-    private UebaMlSchedulerRunner mlSchedulerRunner;
+    private EntityInferenceRunner mlSchedulerRunner;
 
     private static SecurityAnalyticsRunner INSTANCE;
 
@@ -38,7 +38,7 @@ public class SecurityAnalyticsRunner implements ScheduledJobRunner {
         if (job instanceof UebaAggregator)
             aggregatorRunner.runJob(job, context);
 
-        else if (job instanceof UebaMlScheduler)
+        else if (job instanceof EntityInference)
             mlSchedulerRunner.runJob(job, context);
 
         else {
@@ -56,11 +56,11 @@ public class SecurityAnalyticsRunner implements ScheduledJobRunner {
         this.aggregatorRunner = aggregatorRunner;
     }
 
-    public UebaMlSchedulerRunner getMlSchedulerRunner() {
+    public EntityInferenceRunner getMlSchedulerRunner() {
         return mlSchedulerRunner;
     }
 
-    public void setMlSchedulerRunner(UebaMlSchedulerRunner mlSchedulerRunner) {
+    public void setMlSchedulerRunner(EntityInferenceRunner mlSchedulerRunner) {
         this.mlSchedulerRunner = mlSchedulerRunner;
     }
 }

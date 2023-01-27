@@ -1,4 +1,4 @@
-package org.opensearch.securityanalytics.ueba.aggregator;
+package org.opensearch.securityanalytics.ueba.core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,16 +12,15 @@ import org.opensearch.cluster.metadata.IndexMetadata;
 import org.opensearch.cluster.routing.IndexRoutingTable;
 import org.opensearch.cluster.service.ClusterService;
 import org.opensearch.common.settings.Settings;
-import org.opensearch.search.aggregations.Aggregator;
 import org.opensearch.threadpool.ThreadPool;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Objects;
 
-public class AggregatorIndices {
+public class UEBAJobIndices {
 
-    private static final Logger log = LogManager.getLogger(AggregatorIndices.class);
+    private static final Logger log = LogManager.getLogger(UEBAJobIndices.class);
 
     private final AdminClient client;
 
@@ -29,43 +28,40 @@ public class AggregatorIndices {
 
     private final ThreadPool threadPool;
 
-    public AggregatorIndices(AdminClient client, ClusterService clusterService, ThreadPool threadPool) {
+    public UEBAJobIndices(AdminClient client, ClusterService clusterService, ThreadPool threadPool) {
         this.client = client;
         this.clusterService = clusterService;
         this.threadPool = threadPool;
     }
 
-    public static String aggregatorMappings() throws IOException {
-        return new String(Objects.requireNonNull(AggregatorIndices.class.getClassLoader().getResourceAsStream("mappings/aggregators.json")).readAllBytes(), Charset.defaultCharset());
+    public static String jobMappings() throws IOException {
+        return new String(Objects.requireNonNull(UEBAJobIndices.class.getClassLoader().getResourceAsStream("mappings/ueba_job.json")).readAllBytes(), Charset.defaultCharset());
     }
 
-    public void initAggregatorIndex(ActionListener<CreateIndexResponse> actionListener) throws IOException {
-        if (!aggregatorIndexExists()) {
-            CreateIndexRequest indexRequest = new CreateIndexRequest(UebaAggregator.aggregatorsIndex())
-                    .mapping(aggregatorMappings())
+    public void initJobIndex(ActionListener<CreateIndexResponse> actionListener) throws IOException {
+        if (!jobIndexExists()) {
+            CreateIndexRequest indexRequest = new CreateIndexRequest(UEBAJobParameter.jobParameterIndex())
+                    .mapping(jobMappings())
                     .settings(Settings.builder().put("index.hidden", true).build());
             client.indices().create(indexRequest, actionListener);
         }
     }
 
-    public boolean aggregatorIndexExists() {
+    public boolean jobIndexExists() {
         ClusterState clusterState = clusterService.state();
-        return clusterState.getRoutingTable().hasIndex(UebaAggregator.aggregatorsIndex());
+        return clusterState.getRoutingTable().hasIndex(UEBAJobParameter.jobParameterIndex());
     }
 
-    public ClusterIndexHealth aggregatorIndexHealth() {
+    public ClusterIndexHealth jobIndexHealth() {
         ClusterIndexHealth indexHealth = null;
 
-        if (aggregatorIndexExists()) {
-            IndexRoutingTable indexRoutingTable = clusterService.state().routingTable().index(UebaAggregator.aggregatorsIndex());
-            IndexMetadata indexMetadata = clusterService.state().metadata().index(UebaAggregator.aggregatorsIndex());
+        if (jobIndexExists()) {
+            IndexRoutingTable indexRoutingTable = clusterService.state().routingTable().index(UEBAJobParameter.jobParameterIndex());
+            IndexMetadata indexMetadata = clusterService.state().metadata().index(UEBAJobParameter.jobParameterIndex());
 
             indexHealth = new ClusterIndexHealth(indexMetadata, indexRoutingTable);
         }
         return indexHealth;
-    }
-
-    public void indexAggregator(Aggregator aggregator){
     }
 
     public ThreadPool getThreadPool() {

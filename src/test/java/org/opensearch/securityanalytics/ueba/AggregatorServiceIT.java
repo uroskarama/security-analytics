@@ -2,16 +2,21 @@ package org.opensearch.securityanalytics.ueba;
 
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.message.BasicHeader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.opensearch.client.Response;
-import org.opensearch.common.xcontent.*;
+import org.opensearch.common.xcontent.LoggingDeprecationHandler;
+import org.opensearch.common.xcontent.XContentFactory;
+import org.opensearch.common.xcontent.XContentParser;
+import org.opensearch.common.xcontent.XContentType;
 import org.opensearch.commons.alerting.util.IndexUtilsKt;
 import org.opensearch.jobscheduler.spi.schedule.IntervalSchedule;
 import org.opensearch.rest.RestStatus;
 import org.opensearch.securityanalytics.SecurityAnalyticsPlugin;
 import org.opensearch.securityanalytics.SecurityAnalyticsRestTestCase;
 import org.opensearch.securityanalytics.ueba.aggregator.UebaAggregator;
+import org.opensearch.securityanalytics.ueba.inference.EntityInference;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -158,19 +163,61 @@ public class AggregatorServiceIT extends SecurityAnalyticsRestTestCase {
         assertEquals("Execute aggregator failed", RestStatus.OK, restStatus(executeResponse));
     }
 
+    private void executeInference(EntityInference inference) throws IOException {
+        log.debug("Executing inference: " + inference);
+
+        Response executeResponse = makeRequest(client(),
+                "POST",
+                SecurityAnalyticsPlugin.UEBA_INFERENCE_BASE_URI + "/" + inference.getId() + "/_execute",
+                Collections.emptyMap(),
+                new StringEntity("{}", ContentType.APPLICATION_JSON)
+        );
+
+        log.debug("Execute response: " + new String(executeResponse.getEntity().getContent().readAllBytes()));
+
+        assertEquals("Execute inference failed", RestStatus.OK, restStatus(executeResponse));
+    }
+
     private void searchEntities() throws IOException {
         Response searchResponse = makeRequest(client(),
                 "GET",
-                ENTITY_INDEX + "/_search",
+                ENTITY_INDEX + "/_search?pretty",
                 Collections.emptyMap(),
-                new StringEntity("{\n" +
-                        "    \"query\": {\n" +
-                        "        \"match_all\": {}\n" +
-                        "    }\n" +
-                        "}", ContentType.APPLICATION_JSON)
+                new StringEntity("{ \"query\": { \"match_all\": {} } }", ContentType.APPLICATION_JSON),
+                new BasicHeader("Content-Type", "application/json")
         );
 
         log.debug("Entities found: " + new String(searchResponse.getEntity().getContent().readAllBytes()));
+        System.out.println("Entities found: " + new String(searchResponse.getEntity().getContent().readAllBytes()));
+    }
+
+    private EntityInference createInference() throws IOException {
+        String searchRequestString = "{ \"query\": { \"match_all\": {} } }";
+
+        return new EntityInference("inference1234",
+                true,
+                Instant.now(),
+                Instant.now(),
+                new IntervalSchedule(Instant.now(), 1, ChronoUnit.MINUTES),
+                1L,
+                1L,
+                searchRequestString,
+                ENTITY_INDEX,
+                10,
+                ENTITY_INDEX,
+                "http://localhost:8080/itt");
+    }
+
+    private void indexInference(EntityInference inference) throws IOException {
+        Response createResponse = makeRequest(client(),
+                "PUT",
+                SecurityAnalyticsPlugin.UEBA_INFERENCE_BASE_URI + "/" + inference.getId(),
+                Collections.emptyMap(),
+                toHttpEntity(inference)
+        );
+
+        assertEquals("Create aggregator failed", RestStatus.OK, restStatus(createResponse));
+
     }
 
     public void runAggregatorServiceTest(TestSample testSample) throws IOException, InterruptedException {
@@ -186,6 +233,13 @@ public class AggregatorServiceIT extends SecurityAnalyticsRestTestCase {
 
         searchEntities();
 
+        EntityInference inference = createInference();
+
+        indexInference(inference);
+
+        //executeInference(inference);
+
+        Thread.sleep(1000000);
     }
 
     public void testAggregatorServiceOnWinlogData() throws IOException, InterruptedException {

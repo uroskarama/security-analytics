@@ -56,6 +56,7 @@ import org.opensearch.securityanalytics.config.monitors.DetectorMonitorConfig;
 import org.opensearch.securityanalytics.model.Detector;
 import org.opensearch.securityanalytics.model.Rule;
 import org.opensearch.securityanalytics.ueba.aggregator.UebaAggregator;
+import org.opensearch.securityanalytics.ueba.inference.EntityInference;
 import org.opensearch.test.rest.OpenSearchRestTestCase;
 
 
@@ -396,6 +397,10 @@ public class SecurityAnalyticsRestTestCase extends OpenSearchRestTestCase {
         return new StringEntity(toJsonString(aggregator), ContentType.APPLICATION_JSON);
     }
 
+    protected HttpEntity toHttpEntity(EntityInference inference) throws IOException {
+        return new StringEntity(toJsonString(inference), ContentType.APPLICATION_JSON);
+    }
+
     protected RestStatus restStatus(Response response) {
         return RestStatus.fromCode(response.getStatusLine().getStatusCode());
     }
@@ -427,6 +432,11 @@ public class SecurityAnalyticsRestTestCase extends OpenSearchRestTestCase {
     public String toJsonString(UebaAggregator aggregator) throws IOException {
         XContentBuilder builder = XContentFactory.jsonBuilder();
         return IndexUtilsKt.string(shuffleXContent(aggregator.toXContent(builder, ToXContent.EMPTY_PARAMS)));
+    }
+
+    public String toJsonString(EntityInference inference) throws IOException {
+        XContentBuilder builder = XContentFactory.jsonBuilder();
+        return IndexUtilsKt.string(shuffleXContent(inference.toXContent(builder, ToXContent.EMPTY_PARAMS)));
     }
 
     private String alertingScheduledJobMappings() {

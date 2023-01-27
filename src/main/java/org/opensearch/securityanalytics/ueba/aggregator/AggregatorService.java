@@ -7,6 +7,7 @@ import org.opensearch.action.bulk.BulkRequest;
 import org.opensearch.action.bulk.BulkResponse;
 import org.opensearch.action.search.SearchRequest;
 import org.opensearch.action.search.SearchResponse;
+import org.opensearch.action.support.WriteRequest;
 import org.opensearch.action.update.UpdateRequest;
 import org.opensearch.client.Client;
 import org.opensearch.common.xcontent.LoggingDeprecationHandler;
@@ -23,7 +24,7 @@ import org.opensearch.search.builder.SearchSourceBuilder;
 import java.io.IOException;
 import java.util.*;
 
-import static org.opensearch.securityanalytics.ueba.aggregator.AggregatorExecutionMetadata.AggregatorExecutionState.*;
+import static org.opensearch.securityanalytics.ueba.core.UEBAJobExecutionMetadata.ExecutionState.*;
 
 public class AggregatorService {
 
@@ -59,7 +60,7 @@ public class AggregatorService {
         }
 
         public void nextStep(final AggregatorExecutionMetadata metadata, final AggregatorExecutionData data) {
-            final AggregatorExecutionMetadata.AggregatorExecutionState state = metadata.getState();
+            final AggregatorExecutionMetadata.ExecutionState state = metadata.getState();
             try {
                 switch (state){
                     case AGGREGATING:
@@ -134,6 +135,8 @@ public class AggregatorService {
                 nextStep(metadataAfterUpserting(metadata), null);
                 return;
             }
+
+            request.setRefreshPolicy(WriteRequest.RefreshPolicy.IMMEDIATE);
 
             client.bulk(request, new ActionListener<>() {
                 @Override

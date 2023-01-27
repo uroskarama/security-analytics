@@ -1,4 +1,4 @@
-package org.opensearch.securityanalytics.ueba.mlscheduler;
+package org.opensearch.securityanalytics.ueba.inference;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -7,7 +7,7 @@ import org.opensearch.jobscheduler.spi.ScheduledJobParameter;
 import org.opensearch.jobscheduler.spi.ScheduledJobRunner;
 import org.opensearch.securityanalytics.action.ValidateRulesRequest;
 
-public class UebaMlSchedulerRunner implements ScheduledJobRunner {
+public class EntityInferenceRunner implements ScheduledJobRunner {
     private static final Logger log = LogManager.getLogger(ValidateRulesRequest.class);
 
     @Override

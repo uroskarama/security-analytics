@@ -2,7 +2,7 @@
  * Copyright OpenSearch Contributors
  * SPDX-License-Identifier: Apache-2.0
  */
-package org.opensearch.securityanalytics.ueba.aggregator;
+package org.opensearch.securityanalytics.ueba.inference;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,10 +32,10 @@ import org.opensearch.transport.TransportService;
 
 import java.io.IOException;
 
-public class TransportIndexUebaAggregatorAction extends HandledTransportAction<IndexUebaAggregatorRequest, IndexUebaAggregatorResponse> implements SecureTransportAction {
+public class TransportIndexInferenceAction extends HandledTransportAction<IndexEntityInferenceRequest, IndexEntityInferenceResponse> implements SecureTransportAction {
 
     public static final String PLUGIN_OWNER_FIELD = "security_analytics";
-    private static final Logger log = LogManager.getLogger(TransportIndexUebaAggregatorAction.class);
+    private static final Logger log = LogManager.getLogger(TransportIndexInferenceAction.class);
 
     private final Client client;
 
@@ -46,31 +46,28 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
     private final Settings settings;
 
     private final NamedWriteableRegistry namedWriteableRegistry;
-    private final org.opensearch.securityanalytics.ueba.core.UEBAJobIndices UEBAJobIndices;
-    private final AggregatorService aggregatorService;
+    private final UEBAJobIndices jobIndices;
 
     @Inject
-    public TransportIndexUebaAggregatorAction(TransportService transportService,
-                                              Client client,
-                                              ActionFilters actionFilters,
-                                              NamedXContentRegistry xContentRegistry,
-                                              UEBAJobIndices UEBAJobIndices,
-                                              AggregatorService aggregatorService,
-                                              ClusterService clusterService,
-                                              Settings settings,
-                                              NamedWriteableRegistry namedWriteableRegistry) {
-        super(IndexUebaAggregatorAction.NAME, transportService, actionFilters, IndexUebaAggregatorRequest::new);
+    public TransportIndexInferenceAction(TransportService transportService,
+                                         Client client,
+                                         ActionFilters actionFilters,
+                                         NamedXContentRegistry xContentRegistry,
+                                         UEBAJobIndices jobIndices,
+                                         ClusterService clusterService,
+                                         Settings settings,
+                                         NamedWriteableRegistry namedWriteableRegistry) {
+        super(IndexEntityInferenceAction.NAME, transportService, actionFilters, IndexEntityInferenceRequest::new);
         this.client = client;
         this.xContentRegistry = xContentRegistry;
-        this.UEBAJobIndices = UEBAJobIndices;
-        this.aggregatorService = aggregatorService;
+        this.jobIndices = jobIndices;
         this.clusterService = clusterService;
         this.settings = settings;
         this.namedWriteableRegistry = namedWriteableRegistry;
     }
 
     @Override
-    protected void doExecute(Task task, IndexUebaAggregatorRequest request, ActionListener<IndexUebaAggregatorResponse> listener) {
+    protected void doExecute(Task task, IndexEntityInferenceRequest request, ActionListener<IndexEntityInferenceResponse> listener) {
 
         try {
             validateRequest(request);
@@ -84,7 +81,7 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
         }
     }
 
-    private void validateRequest(IndexUebaAggregatorRequest request){
+    private void validateRequest(IndexEntityInferenceRequest request){
         XContentParser xcp;
         try {
             ActionRequestValidationException requestValidationException = request.validate();
@@ -94,7 +91,7 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
 
             xcp = XContentType.JSON.xContent().createParser(
                     xContentRegistry,
-                    LoggingDeprecationHandler.INSTANCE, request.getUebaAggregator().getSearchRequestString());
+                    LoggingDeprecationHandler.INSTANCE, request.getEntityInference().getSearchRequestString());
 
             SearchSourceBuilder searchSourceBuilder = SearchSourceBuilder.fromXContent(xcp);
             SearchRequest searchRequest = new SearchRequest().source(searchSourceBuilder);
@@ -104,58 +101,58 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
                 throw new SecurityAnalyticsException("Request search string is not valid.", RestStatus.BAD_REQUEST, searchStringValidationException);
 
         } catch (IOException e) {
-            log.error("Exception while validating index aggregator request. ", e);
+            log.error("Exception while validating index inference job request. ", e);
             throw new SecurityAnalyticsException("Request string is not valid.", RestStatus.INTERNAL_SERVER_ERROR, e);
         }
     }
 
-    private void lazyCreateAndIndex(IndexUebaAggregatorRequest request, ActionListener<IndexUebaAggregatorResponse> listener) throws IOException {
-        UebaAggregator aggregator = request.getUebaAggregator();
+    private void lazyCreateAndIndex(IndexEntityInferenceRequest request, ActionListener<IndexEntityInferenceResponse> listener) throws IOException {
+        EntityInference inference = request.getEntityInference();
 
-        if (!UEBAJobIndices.jobIndexExists())
+        if (!jobIndices.jobIndexExists())
         {
-            UEBAJobIndices.initJobIndex(new CreateIndexListener(aggregator, listener));
+            jobIndices.initJobIndex(new CreateIndexListener(inference, listener));
 
         } else {
-            indexAggregator(aggregator, listener);
+            indexInference(inference, listener);
 
         }
     }
 
-    private void indexAggregator(UebaAggregator aggregator, ActionListener<IndexUebaAggregatorResponse> listener) throws SecurityAnalyticsException, IOException {
+    private void indexInference(EntityInference inference, ActionListener<IndexEntityInferenceResponse> listener) throws SecurityAnalyticsException, IOException {
         IndexRequest indexRequest = new IndexRequest();
 
         indexRequest.index(UEBAJobParameter.jobParameterIndex())
                 .setRefreshPolicy(WriteRequest.RefreshPolicy.IMMEDIATE)
-                .source(aggregator.toXContent(XContentFactory.jsonBuilder(), null))
-                .id(aggregator.getId());
+                .source(inference.toXContent(XContentFactory.jsonBuilder(), null))
+                .id(inference.getId());
 
-        client.index(indexRequest, new IndexListener(aggregator, listener));
+        client.index(indexRequest, new IndexListener(inference, listener));
     }
 
     private class IndexListener implements ActionListener<IndexResponse> {
 
-        private final UebaAggregator aggregator;
-        private final ActionListener<IndexUebaAggregatorResponse> listener;
+        private final EntityInference inference;
+        private final ActionListener<IndexEntityInferenceResponse> listener;
 
-        IndexListener(UebaAggregator aggregator, ActionListener<IndexUebaAggregatorResponse> listener) { this.aggregator = aggregator; this.listener = listener; }
+        IndexListener(EntityInference inference, ActionListener<IndexEntityInferenceResponse> listener) { this.inference = inference; this.listener = listener; }
 
         @Override
         public void onResponse(IndexResponse indexResponse) {
-            listener.onResponse(new IndexUebaAggregatorResponse(aggregator.getId(), 0L, indexResponse.status(), aggregator));   // TODO: Implement versioning.
+            listener.onResponse(new IndexEntityInferenceResponse(inference.getId(), 0L, indexResponse.status(), inference));   // TODO: Implement versioning.
         }
 
         @Override
         public void onFailure(Exception e) {
-            listener.onFailure(new SecurityAnalyticsException("Unable to index aggregator.", RestStatus.INTERNAL_SERVER_ERROR, e));
+            listener.onFailure(new SecurityAnalyticsException("Unable to index inference job.", RestStatus.INTERNAL_SERVER_ERROR, e));
         }
     }
 
     private class CreateIndexListener implements ActionListener<CreateIndexResponse> {
-        private final UebaAggregator aggregator;
-        private final ActionListener<IndexUebaAggregatorResponse> listener;
+        private final EntityInference inference;
+        private final ActionListener<IndexEntityInferenceResponse> listener;
 
-        CreateIndexListener(UebaAggregator aggregator, ActionListener<IndexUebaAggregatorResponse> listener) { this.aggregator = aggregator; this.listener = listener; }
+        CreateIndexListener(EntityInference inference, ActionListener<IndexEntityInferenceResponse> listener) { this.inference = inference; this.listener = listener; }
 
         @Override
         public void onResponse(CreateIndexResponse createIndexResponse) {
@@ -165,16 +162,16 @@ public class TransportIndexUebaAggregatorAction extends HandledTransportAction<I
             }
 
             try {
-                indexAggregator(aggregator, listener);
+                indexInference(inference, listener);
 
             } catch (IOException e) {
-                listener.onFailure(new SecurityAnalyticsException("Unable to index aggregator.", RestStatus.INTERNAL_SERVER_ERROR, e));
+                listener.onFailure(new SecurityAnalyticsException("Unable to index inference job.", RestStatus.INTERNAL_SERVER_ERROR, e));
             }
         }
 
         @Override
         public void onFailure(Exception e) {
-            listener.onFailure(new SecurityAnalyticsException("Unable to create aggregator index.", RestStatus.INTERNAL_SERVER_ERROR, e));
+            listener.onFailure(new SecurityAnalyticsException("Unable to create job index.", RestStatus.INTERNAL_SERVER_ERROR, e));
         }
     }
 
