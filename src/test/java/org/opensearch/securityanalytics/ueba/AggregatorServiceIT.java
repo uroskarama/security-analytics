@@ -178,7 +178,7 @@ public class AggregatorServiceIT extends SecurityAnalyticsRestTestCase {
         assertEquals("Execute inference failed", RestStatus.OK, restStatus(executeResponse));
     }
 
-    private void searchEntities() throws IOException {
+    private List<Map<String, Object>> searchEntities() throws IOException {
         Response searchResponse = makeRequest(client(),
                 "GET",
                 ENTITY_INDEX + "/_search?pretty",
@@ -186,9 +186,8 @@ public class AggregatorServiceIT extends SecurityAnalyticsRestTestCase {
                 new StringEntity("{ \"query\": { \"match_all\": {} } }", ContentType.APPLICATION_JSON),
                 new BasicHeader("Content-Type", "application/json")
         );
-
-        log.debug("Entities found: " + new String(searchResponse.getEntity().getContent().readAllBytes()));
-        System.out.println("Entities found: " + new String(searchResponse.getEntity().getContent().readAllBytes()));
+        Map<String, Object> respMap = responseAsMap(searchResponse);
+        return (List<Map<String, Object>>) (((Map<String,Object>)respMap.get("hits")).get("hits"));
     }
 
     private EntityInference createInference() throws IOException {
@@ -231,7 +230,7 @@ public class AggregatorServiceIT extends SecurityAnalyticsRestTestCase {
 
         executeAggregator(aggregator);
 
-        searchEntities();
+        List<Map<String, Object>> hits = searchEntities();
 
         EntityInference inference = createInference();
 
